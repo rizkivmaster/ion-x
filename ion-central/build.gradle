@@ -1,0 +1,38 @@
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:1.2.3.RELEASE")
+  }
+}
+
+apply plugin: 'spring-boot'
+apply plugin: 'java'
+apply plugin: 'idea'
+repositories {
+  mavenCentral()
+}
+
+
+jar {
+  baseName = 'ion'
+  version = '0.1.0'
+}
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework:spring-jdbc'
+    compile 'com.h2database:h2'
+    compile 'org.springframework:spring-jdbc:4.1.6.RELEASE'
+    compile 'commons-dbcp:commons-dbcp:1.2.2'
+    compile 'postgresql:postgresql:9.1-901-1.jdbc4'
+    compile project(':ion-exchange')
+    testCompile 'org.testng:testng:6.1.1'
+}
+
+
+task wrapper(type: Wrapper) {
+  gradleVersion = '2.3'
+}

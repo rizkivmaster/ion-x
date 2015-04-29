@@ -1,0 +1,49 @@
+package org.ion.client.services;
+
+import org.ion.client.domain.transaction.ToBankTransfer;
+import org.ion.client.services.util.TopUpTokenCreationResult;
+import org.ion.client.services.util.TopUpTokenRequestSpec;
+
+/**
+ * Created by rizkivmaster on 4/23/15.
+ */
+
+public interface TransactionService {
+  /*
+   * TopUp related service
+   */
+  public TopUpTokenCreationResult createTopUpToken(TopUpTokenRequestSpec topUpRequestSpec);
+  public TopUpConfirmationResult confirTopUp(TopUpRequestSpec topUpConfirmationRequestSpec);
+  public TopUpCancelationResult cancelTopUp(TopUpCancelationRequestSpec topUpCancelationRequestSpec);
+
+  /*
+   * ToBank Transfer related service
+   */
+
+  public ToBankTransferResult createToBankTransfer(ToBankTransferSpec toBankTransferSpec);
+
+  /*
+   * Group Transaction related service
+   */
+  public ToGroupTransferCreationResult createToGroupTransfer(ToGroupTransferCreationSpec toGroupTransferSpec);
+  public ToGroupTransferConfirmationResult confirmToGroupTransfer(ToGroupTransferConfirmationSpec toGroupTransferConfirmationSpec);
+  public ToGroupTransferConfirmationResult cancelToGroupTransfer(ToGroupTransferCancelationSpec toGroupTransferCancelationSpec);
+
+  /*
+   * P2P Transaction related service
+   */
+
+  public P2PTransferCreationResult createP2PTransfer(P2PTransferCreationSpec p2PTransferCreationSpec);
+  public P2PTransferConfirmationResult confirmP2PTransfer(P2PTransferConfirmationSpec p2PTransferConfirmationSpec);
+  public P2PTransferCancelationResult cancelP2PTransfer(P2PTransferCancelationSpec p2PTransferCancelationSpec);
+
+  /*
+   * Commerce related service
+   */
+
+  public PaymentCreationResult createPayment(PaymentCreationSpec paymentCreationSpec);
+  public PaymentConfirmationResult confirmPayment(PaymentConfirmationSpec paymentConfirmationSpec);
+  public PaymentCancelationResult cancelPayment(PaymentCancelationSpec paymentCancelationSpec);
+
+
+}
