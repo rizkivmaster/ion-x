@@ -1,6 +1,7 @@
 package org.ion.client.domain.user;
 
 import org.ion.client.domain.enumeration.SexType;
+import org.joda.time.DateTime;
 
 import java.sql.Time;
 import java.util.Date;
@@ -18,9 +19,9 @@ public abstract class Account{
         private final Boolean _isActive;
         private final SexType _gender;
         private final String _phoneNumber;
-        private final Date _dateCreated;
+        private final DateTime _dateCreated;
 
-        public Account(String id, String username, String passwordHash, String firstName, String lastName, String email, Boolean isActive, SexType gender, String phoneNumber, Date dateCreated) {
+        public Account(String id, String username, String passwordHash, String firstName, String lastName, String email, Boolean isActive, SexType gender, String phoneNumber, DateTime dateCreated) {
                 _id = id;
                 _username = username;
                 _passwordHash = passwordHash;
@@ -97,7 +98,8 @@ public abstract class Account{
                 return _phoneNumber;
         }
 
-        public Date getDateCreated() {
+        public DateTime getDateCreated() {
                 return _dateCreated;
         }
+
 }

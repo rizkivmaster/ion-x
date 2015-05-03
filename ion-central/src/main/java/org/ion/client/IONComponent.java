@@ -3,6 +3,8 @@ package org.ion.client;
 import org.ion.client.accessors.CustomerDataAccessor;
 import org.ion.client.controller.IONMobileController;
 import org.ion.client.services.IONIntegrationTestBase;
+import org.ion.client.services.TransactionService;
+import org.ion.client.services.TransactionServiceImpl;
 import org.ion.client.services.UserDataService;
 import org.ion.client.services.UserDataServiceImpl;
 import org.ion.util.Startable;
@@ -22,6 +24,7 @@ public class IONComponent implements Startable{
    */
 
   private final UserDataService _userDataService;
+  private final TransactionService _transactionService;
 
   /**
    *  the next part is the controller section
@@ -29,16 +32,13 @@ public class IONComponent implements Startable{
 
   private final IONMobileController _mobileController;
 
-  /*
-   * for testing purpose
-   */
-
-  private final IONIntegrationTestBase _ionIntegrationTestBase;
 
   public IONComponent() {
     _customerDataAccessor = new CustomerDataAccessor();
+
     _userDataService = new UserDataServiceImpl(_customerDataAccessor);
-    _ionIntegrationTestBase = new IONIntegrationTestBase(this);
+    _transactionService = new TransactionServiceImpl(_customerDataAccessor);
+
     _mobileController = new IONMobileController(_userDataService);
   }
 
@@ -54,5 +54,9 @@ public class IONComponent implements Startable{
 
   public UserDataService getUserDataService() {
     return _userDataService;
+  }
+
+  public TransactionService getTransactionService() {
+    return _transactionService;
   }
 }

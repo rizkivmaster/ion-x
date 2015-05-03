@@ -14,6 +14,7 @@ import org.ion.client.services.util.RegistrationDeletionSpec;
  */
 public interface UserDataService {
 
+
   public RegistrationCreationResult createRegistration(RegistrationCreationSpec registrationCreationSpec);
   public RegistrationDeletionResult deleteRegistration(RegistrationDeletionSpec registrationDeletionSpec);
   public RegistrationConfirmationResult confirmRegistration(RegistrationConfirmationSpec registrationConfirmationSpec);

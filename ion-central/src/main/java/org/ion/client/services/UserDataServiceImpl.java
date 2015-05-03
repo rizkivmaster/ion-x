@@ -11,6 +11,8 @@ import org.ion.client.services.util.RegistrationCreationResult;
 import org.ion.client.services.util.RegistrationCreationSpec;
 import org.ion.client.services.util.RegistrationDeletionResult;
 import org.ion.client.services.util.RegistrationDeletionSpec;
+import org.joda.time.DateTime;
+import org.springframework.format.datetime.joda.LocalDateTimeParser;
 
 import java.sql.Date;
 
@@ -24,19 +26,20 @@ public class UserDataServiceImpl implements UserDataService{
     _customerDataAccessor = customerDataAccessor;
   }
 
-
+ //TODO implement password hashing
   @Override
   public RegistrationCreationResult createRegistration(RegistrationCreationSpec registrationCreationSpec) {
     _customerDataAccessor.insertNewCustomer(
         registrationCreationSpec.getUsername(),
-        "2tf13432",
+        registrationCreationSpec.getPassword(),
         registrationCreationSpec.getFirstName(),
         registrationCreationSpec.getLastName(),
         registrationCreationSpec.getEmail(),
         true,
         registrationCreationSpec.getGender()==SexType.MALE?"male":"female",
         registrationCreationSpec.getPhoneNumber(),
-        new Date(2015,4,25),
+        new DateTime(),
+        0L,
         registrationCreationSpec.getAddress()
     );
     return null;
@@ -44,6 +47,7 @@ public class UserDataServiceImpl implements UserDataService{
 
   @Override
   public RegistrationDeletionResult deleteRegistration(RegistrationDeletionSpec registrationDeletionSpec) {
+
     return null;
   }
 

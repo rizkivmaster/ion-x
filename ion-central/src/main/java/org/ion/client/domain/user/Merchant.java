@@ -1,6 +1,7 @@
 package org.ion.client.domain.user;
 
 import org.ion.client.domain.enumeration.SexType;
+import org.joda.time.DateTime;
 
 import java.sql.Time;
 import java.util.Date;
@@ -14,7 +15,8 @@ public class Merchant extends Account {
   private final String _companyName;
 
 
-  public Merchant(String id, String username, String passwordHash, String firstName, String lastName, String email, Boolean isActive, SexType gender, String phoneNumber, Date dateCreated, long balance, String companyAddress, String companyName) {
+
+  public Merchant(String id, String username, String passwordHash, String firstName, String lastName, String email, Boolean isActive, SexType gender, String phoneNumber, DateTime dateCreated, long balance, String companyAddress, String companyName) {
     super(id, username, passwordHash, firstName, lastName, email, isActive, gender, phoneNumber, dateCreated);
     _balance = balance;
     _companyAddress = companyAddress;

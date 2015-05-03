@@ -29,6 +29,7 @@ dependencies {
     compile 'commons-dbcp:commons-dbcp:1.2.2'
     compile 'postgresql:postgresql:9.1-901-1.jdbc4'
     compile project(':ion-exchange')
+    compile 'joda-time:joda-time:2.7'
     testCompile 'org.testng:testng:6.1.1'
 }
 

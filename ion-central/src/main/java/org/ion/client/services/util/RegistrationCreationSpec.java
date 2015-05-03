@@ -9,6 +9,7 @@ import java.io.Serializable;
  */
 public class RegistrationCreationSpec implements Serializable {
   private String _username;
+  private String _password;
   private String _firstName;
   private String _lastName;
   private String _email;
@@ -56,6 +57,10 @@ public class RegistrationCreationSpec implements Serializable {
 
   public String getAddress() {
     return _address;
+  }
+
+  public String getPassword() {
+    return _password;
   }
 
   @Override

@@ -23,15 +23,12 @@ import java.util.Random;
  */
 
 @Test
-public class UserDataServiceIntegrationTest {
-  private final Random random = new Random();
-  private int createPositiveRandomInt(){
-    return random.nextInt(10000);
-  }
+public class UserDataServiceIntegrationTest extends IONServiceIntegrationTestBase {
+
 
 
   @Test
-  public void testUserAddService(){
+  public void userDataServiceBasicTest(){
     IONComponent ionComponent = new IONComponent();
     UserDataService userDataService = ionComponent.getUserDataService();
     RegistrationCreationSpec registrationCreationSpec = new RegistrationCreationSpec.Builder()

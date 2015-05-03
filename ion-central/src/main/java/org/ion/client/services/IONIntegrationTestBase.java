@@ -3,20 +3,32 @@ package org.ion.client.services;
 import org.ion.client.IONComponent;
 import org.springframework.boot.test.IntegrationTest;
 
+import java.util.Random;
+
 /**
  * Created by rizkivmaster on 4/25/15.
  * silakan dieksten
  */
 @IntegrationTest
-public class IONIntegrationTestBase {
+public abstract class IONIntegrationTestBase {
   private final IONComponent _ionComponent;
 
 
-  public IONIntegrationTestBase(IONComponent ionComponent) {
-    _ionComponent = ionComponent;
+  public IONIntegrationTestBase() {
+    _ionComponent = new IONComponent();
   }
 
   public UserDataService getUserDataService(){
     return _ionComponent.getUserDataService();
+  }
+  public TransactionService getTransactionService(){ return _ionComponent.getTransactionService();}
+  /*
+   * utilities
+   */
+
+  private final Random random = new Random();
+
+  protected int createPositiveRandomInt(){
+    return random.nextInt(10000);
   }
 }
