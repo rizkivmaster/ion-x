@@ -1,12 +1,11 @@
 package org.ion.client;
 
-import org.ion.client.accessors.CustomerDataAccessor;
+import org.ion.client.accessors.CustomerDataAccessorImpl;
 import org.ion.client.controller.IONMobileController;
-import org.ion.client.services.IONIntegrationTestBase;
 import org.ion.client.services.TransactionService;
-import org.ion.client.services.TransactionServiceImpl;
+import org.ion.client.services.implementation.TransactionServiceImpl;
 import org.ion.client.services.UserDataService;
-import org.ion.client.services.UserDataServiceImpl;
+import org.ion.client.services.implementation.UserDataServiceImpl;
 import org.ion.util.Startable;
 
 /**
@@ -16,7 +15,7 @@ public class IONComponent implements Startable{
   /*
    * Contains all Data Access Object
    */
-  private final CustomerDataAccessor _customerDataAccessor;
+  private final CustomerDataAccessorImpl _customerDataAccessorImpl;
 
 
   /* Contains all services
@@ -34,10 +33,10 @@ public class IONComponent implements Startable{
 
 
   public IONComponent() {
-    _customerDataAccessor = new CustomerDataAccessor();
+    _customerDataAccessorImpl = new CustomerDataAccessorImpl();
 
-    _userDataService = new UserDataServiceImpl(_customerDataAccessor);
-    _transactionService = new TransactionServiceImpl(_customerDataAccessor);
+    _userDataService = new UserDataServiceImpl(_customerDataAccessorImpl);
+    _transactionService = new TransactionServiceImpl(_customerDataAccessorImpl);
 
     _mobileController = new IONMobileController(_userDataService);
   }

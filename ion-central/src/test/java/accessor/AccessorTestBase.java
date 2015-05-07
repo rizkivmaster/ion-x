@@ -1,9 +1,7 @@
 package accessor;
 
-import org.ion.client.accessors.CustomerDataAccessor;
+import org.ion.client.accessors.CustomerDataAccessorImpl;
 import org.ion.client.services.IONIntegrationTestBase;
-
-import java.util.Random;
 
 /**
  * // TODO Comment
@@ -13,15 +11,15 @@ public abstract class AccessorTestBase extends IONIntegrationTestBase {
   /*
      * Accessors lists
      */
-  private final CustomerDataAccessor _customerDataAccessor;
+  private final CustomerDataAccessorImpl _customerDataAccessorImpl;
 
-  public CustomerDataAccessor getCustomerDataAccessor() {
-    return _customerDataAccessor;
+  public CustomerDataAccessorImpl getCustomerDataAccessorImpl() {
+    return _customerDataAccessorImpl;
   }
 
 
   protected AccessorTestBase() {
-    _customerDataAccessor = new CustomerDataAccessor();
+    _customerDataAccessorImpl = new CustomerDataAccessorImpl();
   }
 
 

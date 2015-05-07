@@ -1,8 +1,9 @@
-package org.ion.client.services;
+package org.ion.client.services.implementation;
 
-import org.ion.client.accessors.CustomerDataAccessor;
+import org.ion.client.accessors.CustomerDataAccessorImpl;
 import org.ion.client.domain.enumeration.SexType;
 import org.ion.client.domain.user.Customer;
+import org.ion.client.services.UserDataService;
 import org.ion.client.services.util.CustomerReadDetailResult;
 import org.ion.client.services.util.CustomerReadDetailSpec;
 import org.ion.client.services.util.RegistrationConfirmationResult;
@@ -12,24 +13,21 @@ import org.ion.client.services.util.RegistrationCreationSpec;
 import org.ion.client.services.util.RegistrationDeletionResult;
 import org.ion.client.services.util.RegistrationDeletionSpec;
 import org.joda.time.DateTime;
-import org.springframework.format.datetime.joda.LocalDateTimeParser;
-
-import java.sql.Date;
 
 /**
  * Created by rizkivmaster on 4/24/15.
  */
-public class UserDataServiceImpl implements UserDataService{
-  private final CustomerDataAccessor _customerDataAccessor;
+public class UserDataServiceImpl implements UserDataService {
+  private final CustomerDataAccessorImpl _customerDataAccessorImpl;
 
-  public UserDataServiceImpl(CustomerDataAccessor customerDataAccessor) {
-    _customerDataAccessor = customerDataAccessor;
+  public UserDataServiceImpl(CustomerDataAccessorImpl customerDataAccessorImpl) {
+    _customerDataAccessorImpl = customerDataAccessorImpl;
   }
 
  //TODO implement password hashing
   @Override
   public RegistrationCreationResult createRegistration(RegistrationCreationSpec registrationCreationSpec) {
-    _customerDataAccessor.insertNewCustomer(
+    _customerDataAccessorImpl.insertNewCustomer(
         registrationCreationSpec.getUsername(),
         registrationCreationSpec.getPassword(),
         registrationCreationSpec.getFirstName(),
@@ -58,7 +56,7 @@ public class UserDataServiceImpl implements UserDataService{
 
   @Override
   public CustomerReadDetailResult readCustomerDetail(CustomerReadDetailSpec customerReadDetailSpec) {
-    Customer customer = _customerDataAccessor.readCustomerByUsername(customerReadDetailSpec.getUsername());
+    Customer customer = _customerDataAccessorImpl.readCustomerByUsername(customerReadDetailSpec.getUsername());
     return new CustomerReadDetailResult(customer);
   }
 }

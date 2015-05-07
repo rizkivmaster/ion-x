@@ -1,6 +1,5 @@
 package accessor;
 
-import org.ion.client.domain.enumeration.SexType;
 import org.ion.client.domain.user.Customer;
 import org.joda.time.DateTime;
 import org.testng.annotations.Test;
@@ -14,7 +13,7 @@ public class CustomerDataAccessorTest extends AccessorTestBase {
   @Test
   public void customerDataAccessorBasicTest() throws Exception {
     {
-      getCustomerDataAccessor().insertNewCustomer(
+      getCustomerDataAccessorImpl().insertNewCustomer(
           "aminudin",
           "4h3k2bkfba",
           "Amin",
@@ -30,32 +29,32 @@ public class CustomerDataAccessorTest extends AccessorTestBase {
     }
 
     {
-      Customer customerAdded = getCustomerDataAccessor().readCustomerByUsername("aminudin");
+      Customer customerAdded = getCustomerDataAccessorImpl().readCustomerByUsername("aminudin");
       assertNotNull(customerAdded);
       assertEquals("4h3k2bkfba", customerAdded.getPasswordHash());
     }
 
     {
-      Customer customer1 = getCustomerDataAccessor().readCustomerByUsername("aminudin");
+      Customer customer1 = getCustomerDataAccessorImpl().readCustomerByUsername("aminudin");
       assertFalse(customer1.isActive());
-      getCustomerDataAccessor().setCustomerAsActive("aminudin");
-      Customer customer2 = getCustomerDataAccessor().readCustomerByUsername("aminudin");
+      getCustomerDataAccessorImpl().setCustomerAsActive("aminudin");
+      Customer customer2 = getCustomerDataAccessorImpl().readCustomerByUsername("aminudin");
       assertNotNull(customer2);
       assertTrue(customer2.isActive());
     }
 
     {
-      Customer customer1 = getCustomerDataAccessor().readCustomerByUsername("aminudin");
+      Customer customer1 = getCustomerDataAccessorImpl().readCustomerByUsername("aminudin");
       long balance = createPositiveRandomInt();
-      getCustomerDataAccessor().setCustomerBalance(customer1.getUsername(),balance);
-      Customer customer2 = getCustomerDataAccessor().readCustomerByUsername("aminudin");
+      getCustomerDataAccessorImpl().setCustomerBalance(customer1.getUsername(),balance);
+      Customer customer2 = getCustomerDataAccessorImpl().readCustomerByUsername("aminudin");
       assertNotNull(customer2);
       assertEquals(balance,customer2.getBalance());
     }
 
     {
-      getCustomerDataAccessor().deleteCustomer("aminudin");
-      Customer customerDeleted = getCustomerDataAccessor().readCustomerByUsername("aminudin");
+      getCustomerDataAccessorImpl().deleteCustomer("aminudin");
+      Customer customerDeleted = getCustomerDataAccessorImpl().readCustomerByUsername("aminudin");
       assertNull(customerDeleted);
     }
   }
