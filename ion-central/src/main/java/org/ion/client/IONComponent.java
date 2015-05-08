@@ -1,6 +1,6 @@
 package org.ion.client;
 
-import org.ion.client.accessors.CustomerDataAccessorImpl;
+import org.ion.client.accessors.AccountDataAccessorImpl;
 import org.ion.client.controller.IONMobileController;
 import org.ion.client.services.TransactionService;
 import org.ion.client.services.implementation.TransactionServiceImpl;
@@ -15,7 +15,7 @@ public class IONComponent implements Startable{
   /*
    * Contains all Data Access Object
    */
-  private final CustomerDataAccessorImpl _customerDataAccessorImpl;
+  private final AccountDataAccessorImpl _customerDataAccessorImpl;
 
 
   /* Contains all services
@@ -33,7 +33,7 @@ public class IONComponent implements Startable{
 
 
   public IONComponent() {
-    _customerDataAccessorImpl = new CustomerDataAccessorImpl();
+    _customerDataAccessorImpl = new AccountDataAccessorImpl();
 
     _userDataService = new UserDataServiceImpl(_customerDataAccessorImpl);
     _transactionService = new TransactionServiceImpl(_customerDataAccessorImpl);

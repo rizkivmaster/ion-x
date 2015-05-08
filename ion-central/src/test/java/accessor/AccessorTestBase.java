@@ -1,6 +1,6 @@
 package accessor;
 
-import org.ion.client.accessors.CustomerDataAccessorImpl;
+import org.ion.client.accessors.AccountDataAccessorImpl;
 import org.ion.client.services.IONIntegrationTestBase;
 
 /**
@@ -11,15 +11,15 @@ public abstract class AccessorTestBase extends IONIntegrationTestBase {
   /*
      * Accessors lists
      */
-  private final CustomerDataAccessorImpl _customerDataAccessorImpl;
+  private final AccountDataAccessorImpl _customerDataAccessorImpl;
 
-  public CustomerDataAccessorImpl getCustomerDataAccessorImpl() {
+  public AccountDataAccessorImpl getCustomerDataAccessorImpl() {
     return _customerDataAccessorImpl;
   }
 
 
   protected AccessorTestBase() {
-    _customerDataAccessorImpl = new CustomerDataAccessorImpl();
+    _customerDataAccessorImpl = new AccountDataAccessorImpl();
   }
 
 

@@ -4,7 +4,6 @@ import org.apache.commons.dbcp.BasicDataSource;
 import org.ion.client.domain.enumeration.SexType;
 import org.ion.client.domain.user.Customer;
 import org.joda.time.DateTime;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -12,19 +11,18 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Logger;
 
 
 /**
  * Created by rizkivmaster on 4/24/15.
  */
-public class CustomerDataAccessorImpl implements CustomerDataAccessor {
+public class AccountDataAccessorImpl implements AccountDataAccessor {
 
   //TODO if this project does not fail, please extend the method to be more general
 
   private final JdbcTemplate _jdbcTemplate;
 
-  public CustomerDataAccessorImpl() {
+  public AccountDataAccessorImpl() {
     BasicDataSource basicDataSource = new BasicDataSource();
     basicDataSource.setUrl("jdbc:postgresql://localhost:5432/iondb");
     basicDataSource.setUsername("postgres");

@@ -1,6 +1,6 @@
 package org.ion.client.services.implementation;
 
-import org.ion.client.accessors.CustomerDataAccessorImpl;
+import org.ion.client.accessors.AccountDataAccessorImpl;
 import org.ion.client.domain.enumeration.SexType;
 import org.ion.client.domain.user.Customer;
 import org.ion.client.services.UserDataService;
@@ -18,9 +18,9 @@ import org.joda.time.DateTime;
  * Created by rizkivmaster on 4/24/15.
  */
 public class UserDataServiceImpl implements UserDataService {
-  private final CustomerDataAccessorImpl _customerDataAccessorImpl;
+  private final AccountDataAccessorImpl _customerDataAccessorImpl;
 
-  public UserDataServiceImpl(CustomerDataAccessorImpl customerDataAccessorImpl) {
+  public UserDataServiceImpl(AccountDataAccessorImpl customerDataAccessorImpl) {
     _customerDataAccessorImpl = customerDataAccessorImpl;
   }
 
