@@ -1,7 +1,9 @@
-package org.ion.client.accessors;
+package org.ion.client.accessors.implementation;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.ion.client.accessors.AccountDataAccessor;
 import org.ion.client.domain.enumeration.SexType;
+import org.ion.client.domain.user.Account;
 import org.ion.client.domain.user.Customer;
 import org.joda.time.DateTime;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -86,7 +88,7 @@ public class AccountDataAccessorImpl implements AccountDataAccessor {
   }
 
   @Override
-  public void upsertCustomer(Customer customer) {
+  public void upsertCustomer(Account account) {
     // TODO impl
   }
 

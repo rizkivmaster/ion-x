@@ -1,6 +1,6 @@
 package org.ion.client.services.implementation;
 
-import org.ion.client.accessors.AccountDataAccessorImpl;
+import org.ion.client.accessors.AccountDataAccessor;
 import org.ion.client.domain.enumeration.SexType;
 import org.ion.client.domain.user.Customer;
 import org.ion.client.services.UserDataService;
@@ -18,28 +18,28 @@ import org.joda.time.DateTime;
  * Created by rizkivmaster on 4/24/15.
  */
 public class UserDataServiceImpl implements UserDataService {
-  private final AccountDataAccessorImpl _customerDataAccessorImpl;
+  private final AccountDataAccessor _customerDataAccessor;
 
-  public UserDataServiceImpl(AccountDataAccessorImpl customerDataAccessorImpl) {
-    _customerDataAccessorImpl = customerDataAccessorImpl;
+  public UserDataServiceImpl(AccountDataAccessor customerDataAccessor) {
+    _customerDataAccessor = customerDataAccessor;
   }
 
  //TODO implement password hashing
   @Override
   public RegistrationCreationResult createRegistration(RegistrationCreationSpec registrationCreationSpec) {
-    _customerDataAccessorImpl.insertNewCustomer(
-        registrationCreationSpec.getUsername(),
-        registrationCreationSpec.getPassword(),
-        registrationCreationSpec.getFirstName(),
-        registrationCreationSpec.getLastName(),
-        registrationCreationSpec.getEmail(),
-        true,
-        registrationCreationSpec.getGender()==SexType.MALE?"male":"female",
-        registrationCreationSpec.getPhoneNumber(),
-        new DateTime(),
-        0L,
-        registrationCreationSpec.getAddress()
-    );
+//    _customerDataAccessor.insertNewCustomer(
+//        registrationCreationSpec.getUsername(),
+//        registrationCreationSpec.getPassword(),
+//        registrationCreationSpec.getFirstName(),
+//        registrationCreationSpec.getLastName(),
+//        registrationCreationSpec.getEmail(),
+//        true,
+//        registrationCreationSpec.getGender() == SexType.MALE ? "male" : "female",
+//        registrationCreationSpec.getPhoneNumber(),
+//        new DateTime(),
+//        0L,
+//        registrationCreationSpec.getAddress()
+//    );
     return null;
   }
 
@@ -56,7 +56,8 @@ public class UserDataServiceImpl implements UserDataService {
 
   @Override
   public CustomerReadDetailResult readCustomerDetail(CustomerReadDetailSpec customerReadDetailSpec) {
-    Customer customer = _customerDataAccessorImpl.readCustomerByUsername(customerReadDetailSpec.getUsername());
-    return new CustomerReadDetailResult(customer);
+//    Customer customer = _customerDataAccessor.readCustomerByUsername(customerReadDetailSpec.getUsername());
+//    return new CustomerReadDetailResult(customer);
+    return null;
   }
 }

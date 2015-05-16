@@ -1,6 +1,6 @@
 package org.ion.client.accessors;
 
-import org.ion.client.accessors.util.SavingAccount;
+import org.ion.client.domain.transaction.SavingAccount;
 import org.ion.client.domain.user.Account;
 
 /**

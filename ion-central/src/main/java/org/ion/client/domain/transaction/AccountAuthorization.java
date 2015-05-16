@@ -1,4 +1,4 @@
-package org.ion.client.accessors.util;
+package org.ion.client.domain.transaction;
 
 import org.ion.client.domain.user.Authorizable;
 

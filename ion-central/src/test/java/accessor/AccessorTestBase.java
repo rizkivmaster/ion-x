@@ -1,6 +1,6 @@
 package accessor;
 
-import org.ion.client.accessors.AccountDataAccessorImpl;
+import org.ion.client.accessors.implementation.AccountDataAccessorImpl;
 import org.ion.client.services.IONIntegrationTestBase;
 
 /**

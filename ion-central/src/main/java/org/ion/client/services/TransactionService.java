@@ -1,6 +1,8 @@
 package org.ion.client.services;
 
+import org.ion.client.domain.transaction.SavingAccount;
 import org.ion.client.domain.user.Account;
+import org.ion.client.domain.user.BankAccount;
 import org.ion.client.services.util.TopUpCancellationResult;
 import org.ion.client.services.util.TopUpCancellationSpec;
 import org.ion.client.services.util.TopUpConfirmationSpec;
@@ -16,8 +18,13 @@ public interface TransactionService {
   /*
    * TopUp related service
    */
-  public void topUpCustomerSaving(Account account
-      , long amount) throws Exception;
+  public void reloadBalance(BankAccount srcBankAccount, SavingAccount dstSavingAccount,long amount) throws Exception;
+
+  public void unloadBalance(SavingAccount srcSavingAccount, BankAccount dstBankAccount, long amount) throws  Exception;
+
+  public void transferP2P(SavingAccount srcSavingAccount, SavingAccount dstSavingAccount, long amount) throws  Exception;
+
+
 //  public TopUpConfirmationResult confirmTopUp(TopUpConfirmationSpec topUpConfirmationRequestSpec);
 //  public TopUpCancellationResult cancelTopUp(TopUpCancellationSpec topUpCancellationRequestSpec);
 
@@ -38,7 +45,7 @@ public interface TransactionService {
    * P2P Transaction related service
    */
 
-  public void p2pTransfer(Account srcAccount, Account dstAccount, long amount) throws Exception;
+
   /*public void confirmP2PTransfer(P2PTransferConfirmationSpec p2PTransferConfirmationSpec);
   public void cancelP2PTransfer(P2PTransferCancelationSpec p2PTransferCancelationSpec);*/
   /*

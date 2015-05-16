@@ -2,9 +2,10 @@ package org.ion.client.services.implementation;
 
 import org.ion.client.accessors.AccountSavingAccessor;
 import org.ion.client.accessors.AccountDataAccessor;
-import org.ion.client.accessors.util.SavingAccount;
+import org.ion.client.domain.transaction.SavingAccount;
 import org.ion.client.domain.user.Account;
-import org.ion.client.domain.user.Customer;
+import org.ion.client.domain.user.BankAccount;
+import org.ion.client.services.BankAccountTransactionService;
 import org.ion.client.services.TransactionService;
 
 /**
@@ -13,33 +14,51 @@ import org.ion.client.services.TransactionService;
 public class TransactionServiceImpl implements TransactionService {
   private final AccountDataAccessor _accountDataAccessor;
   private final AccountSavingAccessor _accountSavingAccessor;
+  private final BankAccountTransactionService _bankAccountTransactionService;
 
-  public TransactionServiceImpl(AccountDataAccessor accountDataAccessor, AccountSavingAccessor accountSavingAccessor) {
+  private final BankAccount _ionBankAccount;
+
+  public TransactionServiceImpl(AccountDataAccessor accountDataAccessor, AccountSavingAccessor accountSavingAccessor, BankAccountTransactionService bankAccountTransactionService, BankAccount ionBankAccount) {
     _accountDataAccessor = accountDataAccessor;
     _accountSavingAccessor = accountSavingAccessor;
+    _bankAccountTransactionService = bankAccountTransactionService;
+    _ionBankAccount = ionBankAccount;
   }
 
 
   @Override
-  public void topUpCustomerSaving(Account account, long amount) throws Exception {
-    assert amount>0;
-    assert account!=null;
-    SavingAccount savingAccount = _accountSavingAccessor.getSavingAccount(account);
-    savingAccount.setAmount(savingAccount.getAmount()+amount);
-    _accountSavingAccessor.upsertSavingAccount(savingAccount);
+  public void reloadBalance(BankAccount srcBankAccount, SavingAccount dstSavingAccount, long amount) throws Exception {
+    assert amount > 0;
+    assert srcBankAccount!=null;
+    assert dstSavingAccount!=null;
+    //to where?
+    _bankAccountTransactionService.transferP2P(srcBankAccount,_ionBankAccount, amount);
+    dstSavingAccount.setAmount(dstSavingAccount.getAmount()+amount);
+    _accountSavingAccessor.upsertSavingAccount(dstSavingAccount);
+
   }
 
   @Override
-  public void p2pTransfer(Account srcAccount, Account dstAccount, long amount) throws Exception {
+  public void transferP2P(SavingAccount srcSavingAccount, SavingAccount dstSavingAccount, long amount) throws Exception {
     assert amount>0;
-    assert srcAccount!=null;
-    assert dstAccount!=null;
-    SavingAccount savingAccountOrigin = _accountSavingAccessor.getSavingAccount(srcAccount);
-    SavingAccount savingAccountDestination = _accountSavingAccessor.getSavingAccount(dstAccount);
-    assert savingAccountOrigin.getAmount() - amount >= 0;
-    savingAccountOrigin.setAmount(savingAccountOrigin.getAmount() - amount);
-    savingAccountDestination.setAmount(savingAccountDestination.getAmount()+amount);
-    _accountSavingAccessor.upsertSavingAccount(savingAccountOrigin);
-    _accountSavingAccessor.upsertSavingAccount(savingAccountDestination);
+    assert srcSavingAccount!=null;
+    assert dstSavingAccount!=null;
+    assert srcSavingAccount.getAmount()>amount;
+    dstSavingAccount.setAmount(dstSavingAccount.getAmount()-amount);
+    srcSavingAccount.setAmount(srcSavingAccount.getAmount()-amount);
+    _accountSavingAccessor.upsertSavingAccount(srcSavingAccount);
+    _accountSavingAccessor.upsertSavingAccount(dstSavingAccount);
+  }
+
+  @Override
+  public void unloadBalance(SavingAccount srcSavingAccount, BankAccount dstBankAccount, long amount) throws Exception {
+    assert amount>0;
+    assert srcSavingAccount!=null;
+    assert dstBankAccount!=null;
+    assert srcSavingAccount.getAmount()>amount;
+    //asumsi berhasil
+    _bankAccountTransactionService.transferP2P(_ionBankAccount,dstBankAccount,amount);
+    srcSavingAccount.setAmount(srcSavingAccount.getAmount()-amount);
+    _accountSavingAccessor.upsertSavingAccount(srcSavingAccount);
   }
 }

@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.activity_main);/*
     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
     StrictMode.setThreadPolicy(policy);
@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
     });
 
 
-
+*/
 
   }
 

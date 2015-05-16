@@ -14,9 +14,8 @@ public class Customer extends Account{
     private final long _balance;
     private final String _address;
 
-
-  public Customer(String id, String username, String passwordHash, String firstName, String lastName, String email, Boolean isActive, SexType gender, String phoneNumber, DateTime dateCreated, long balance, String address) {
-    super(id, username, passwordHash, firstName, lastName, email, isActive, gender, phoneNumber, dateCreated);
+  public Customer(String id, String username, String firstName, String lastName, String email, SexType gender, String phoneNumber, long balance, String address) {
+    super(id, username, firstName, lastName, email, gender, phoneNumber);
     _balance = balance;
     _address = address;
   }

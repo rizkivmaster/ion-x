@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class InvoiceDataAccessor {
 
-
+/*
   private final JdbcTemplate _jdbcTemplate;
 
   public InvoiceDataAccessor(){
@@ -28,6 +28,6 @@ public class InvoiceDataAccessor {
   public void setInvoicePaymentStatus(long userInvoiceId, boolean isPaid)
   {
 
-  }
+  }*/
 
 }
