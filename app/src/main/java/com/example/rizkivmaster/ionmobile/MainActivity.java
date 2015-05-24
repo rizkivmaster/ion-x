@@ -2,17 +2,18 @@ package com.example.rizkivmaster.ionmobile;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.os.StrictMode;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import org.ionexchange.SexType;
-import org.ionexchange.UserRegistrationRequest;
+import org.ionexchange.v1.SexType;
+import org.ionexchange.v0.UserRegistrationRequest;
+import org.ionexchange.v1.objects.UserRegistrationCreationRequest;
+import org.ionexchange.v1.objects.UserRegistrationCreationResponse;
+import org.ionexchange.v1.router.Routers;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -31,11 +32,12 @@ public class MainActivity extends Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);/*
+    setContentView(R.layout.activity_main);
     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
     StrictMode.setThreadPolicy(policy);
-
+    testSendMessage();
+/*
     btnSubmit = (Button) findViewById(R.id.submit);
     btnCancel = (Button) findViewById(R.id.cancel);
     edtUsername = (EditText) findViewById(R.id.username);
@@ -129,25 +131,24 @@ public class MainActivity extends Activity {
     String gender = "male";
     String phoneNumber = "800409769834";
     String address = "jalan jalan";
-    UserRegistrationRequest registrationCreationSpec = new UserRegistrationRequest.Builder()
-        .setUsername(username)
-        .setFirstName(firstName)
-        .setLastName(lastName)
-        .setEmail(email)
-        .setGender(gender.equals("male")? SexType.MALE:SexType.FEMALE)
-        .setPhoneNumber(phoneNumber)
-        .setAddress(address)
-        .createUserRegistrationRequest();
+    UserRegistrationCreationRequest registrationCreationSpec = new UserRegistrationCreationRequest();
+    registrationCreationSpec.setUsername(username);
+    registrationCreationSpec.setFirstName(firstName);
+    registrationCreationSpec.setLastName(lastName);
+    registrationCreationSpec.setEmail(email);
+    registrationCreationSpec.setGender(gender.equals("male") ? SexType.MALE : SexType.FEMALE);
+    registrationCreationSpec.setPhoneNumber(phoneNumber);
+    registrationCreationSpec.setAddress(address);
 //    new HttpRequestTask().execute(registrationCreationSpec);
-    final String url2 = "http://192.168.1.70:8080/create";
+    final String url2 = "http://192.168.1.70:8080"+ Routers.USER_REGISTRATION_CREATION;
 
     RestTemplate restTemplate = new RestTemplate();
     restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
     restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-    UserRegistrationRequest response2 = null;
+    UserRegistrationCreationResponse response2 = null;
     try {
-       response2 = restTemplate.postForObject(url2, registrationCreationSpec, UserRegistrationRequest.class);
-        assert(registrationCreationSpec.getFirstName().equals(response2.getFirstName()));
+       response2 = restTemplate.postForObject(url2, registrationCreationSpec, UserRegistrationCreationResponse.class);
+//        assert(registrationCreationSpec.getFirstName().equals(response2.getFirstName()));
       Log.i("success",registrationCreationSpec.getFirstName());
     }
     catch (Exception e)

@@ -1,15 +1,13 @@
-package org.ion.client.services.util;
+package org.ionexchange.v0;
 
-import org.ion.client.domain.enumeration.SexType;
 
-import java.io.Serializable;
+import org.ionexchange.v1.SexType;
 
 /**
- * Created by rizkivmaster on 4/24/15.
+ * Created by rizkivmaster on 4/27/15.
  */
-public class RegistrationCreationSpec implements Serializable {
+public class UserRegistrationRequest {
   private String _username;
-  private String _password;
   private String _firstName;
   private String _lastName;
   private String _email;
@@ -17,8 +15,10 @@ public class RegistrationCreationSpec implements Serializable {
   private String _phoneNumber;
   private String _address;
 
+  public UserRegistrationRequest() {
+  }
 
-  public RegistrationCreationSpec(String username, String firstName, String lastName, String email, SexType gender, String phoneNumber, String address) {
+  public UserRegistrationRequest(String username, String firstName, String lastName, String email, SexType gender, String phoneNumber, String address) {
     _username = username;
     _firstName = firstName;
     _lastName = lastName;
@@ -28,7 +28,32 @@ public class RegistrationCreationSpec implements Serializable {
     _address = address;
   }
 
-  public RegistrationCreationSpec() {
+  public void setUsername(String username) {
+    _username = username;
+  }
+
+  public void setFirstName(String firstName) {
+    _firstName = firstName;
+  }
+
+  public void setLastName(String lastName) {
+    _lastName = lastName;
+  }
+
+  public void setEmail(String email) {
+    _email = email;
+  }
+
+  public void setGender(SexType gender) {
+    _gender = gender;
+  }
+
+  public void setPhoneNumber(String phoneNumber) {
+    _phoneNumber = phoneNumber;
+  }
+
+  public void setAddress(String address) {
+    _address = address;
   }
 
   public String getUsername() {
@@ -57,15 +82,6 @@ public class RegistrationCreationSpec implements Serializable {
 
   public String getAddress() {
     return _address;
-  }
-
-  public String getPassword() {
-    return _password;
-  }
-
-  @Override
-  public String toString() {
-    return _username+" "+_firstName;
   }
 
   public static class Builder {
@@ -112,9 +128,8 @@ public class RegistrationCreationSpec implements Serializable {
       return this;
     }
 
-    public RegistrationCreationSpec createRegistrationCreationSpec() {
-      return new RegistrationCreationSpec(_username, _firstName, _lastName, _email, _gender, _phoneNumber, _address);
+    public UserRegistrationRequest createUserRegistrationRequest() {
+      return new UserRegistrationRequest(_username, _firstName, _lastName, _email, _gender, _phoneNumber, _address);
     }
   }
-
 }

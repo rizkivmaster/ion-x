@@ -7,7 +7,7 @@ import static org.testng.Assert.*;
 
 /**
  * // TODO Comment
- */
+ *//*
 public class CustomerDataAccessorTest extends AccessorTestBase {
 
   @Test
@@ -58,4 +58,4 @@ public class CustomerDataAccessorTest extends AccessorTestBase {
       assertNull(customerDeleted);
     }
   }
-}
+}*/

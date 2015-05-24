@@ -1,26 +1,24 @@
+/*
 package services;
 
 import org.ion.client.IONComponent;
 import org.ion.client.domain.enumeration.SexType;
-import org.ion.client.domain.user.Customer;
 import org.ion.client.services.UserDataService;
 import org.ion.client.services.util.CustomerReadDetailResult;
 import org.ion.client.services.util.CustomerReadDetailSpec;
 import org.ion.client.services.util.RegistrationCreationSpec;
-import org.ionexchange.UserRegistrationRequest;
+import org.ionexchange.v0.UserRegistrationRequest;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
+*/
 /**
  * Created by rizkivmaster on 4/25/15.
- */
+ *//*
+
 
 @Test
 public class UserDataServiceIntegrationTest extends IONServiceIntegrationTestBase {
@@ -40,7 +38,7 @@ public class UserDataServiceIntegrationTest extends IONServiceIntegrationTestBas
         .setPhoneNumber("0812412453")
         .setAddress("Jalan Aksara")
         .createRegistrationCreationSpec();
-    userDataService.createRegistration(registrationCreationSpec);
+    userDataService.createUserRegistration(registrationCreationSpec);
     CustomerReadDetailSpec customerReadDetailSpec = new CustomerReadDetailSpec("rosto");
     CustomerReadDetailResult customerReadDetailResult = userDataService.readCustomerDetail(customerReadDetailSpec);
     assertEquals(customerReadDetailResult.getCustomer().getPhoneNumber(),registrationCreationSpec.getPhoneNumber());
@@ -56,11 +54,11 @@ public class UserDataServiceIntegrationTest extends IONServiceIntegrationTestBas
         .setFirstName("Rosto")
         .setLastName("Vandiesel")
         .setEmail("test@gmail.com")
-        .setGender(org.ionexchange.SexType.MALE)
+        .setGender(org.ionexchange.v1.SexType.MALE)
         .setPhoneNumber("0812412453")
         .setAddress("Jalan Aksara")
         .createUserRegistrationRequest();
-//    userDataService.createRegistration(registrationCreationSpec);
+//    userDataService.createUserRegistration(registrationCreationSpec);
 //    CustomerReadDetailResult customerReadDetailResult = userDataService.readCustomerDetail(customerReadDetailSpec);
     RestTemplate restTemplate = new RestTemplate();
     restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
@@ -71,4 +69,4 @@ public class UserDataServiceIntegrationTest extends IONServiceIntegrationTestBas
 //    assert(customerReadDetailResult.getCustomer().getEmail().equals(registrationCreationSpec.getEmail()));
   }
 
-}
+}*/

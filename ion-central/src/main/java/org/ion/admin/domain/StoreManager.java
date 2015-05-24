@@ -9,7 +9,9 @@ import java.util.Date;
 
 public class StoreManager extends Account {
 
-  public StoreManager(String id, String username, String passwordHash, String firstName, String lastName, String email, Boolean isActive, SexType gender, String phoneNumber, DateTime dateCreated) {
-    super(id, username, passwordHash, firstName, lastName, email, isActive, gender, phoneNumber, dateCreated);
+
+
+  public StoreManager(String id, String username, String firstName, String lastName, String email, SexType gender, String phoneNumber) {
+    super(id, username, firstName, lastName, email, gender, phoneNumber);
   }
 }

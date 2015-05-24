@@ -21,7 +21,7 @@ public abstract class IONIntegrationTestBase {
   public UserDataService getUserDataService(){
     return _ionComponent.getUserDataService();
   }
-  public TransactionService getTransactionService(){ return _ionComponent.getTransactionService();}
+//  public TransactionService getTransactionService(){ return _ionComponent.getTransactionService();}
   /*
    * utilities
    */

@@ -1,14 +1,13 @@
 package org.ion.client;
 
 import org.ion.client.accessors.AccountDataAccessor;
-import org.ion.client.accessors.implementation.AccountDataAccessorImpl;
 import org.ion.client.accessors.AccountSavingAccessor;
+import org.ion.client.accessors.implementation.AccountDataAccessorMockImpl;
 import org.ion.client.accessors.implementation.AccountSavingAccessorImpl;
 import org.ion.client.accessors.AuthorizationDataAccessor;
 import org.ion.client.accessors.implementation.AuthorizationDataAccessorImpl;
-import org.ion.client.controller.IONMobileController;
-import org.ion.client.services.TransactionService;
-import org.ion.client.services.implementation.TransactionServiceImpl;
+import org.ion.client.api.v1.UserAPI;
+import org.ion.client.api.v1.UserAPIImpl;
 import org.ion.client.services.UserDataService;
 import org.ion.client.services.implementation.UserDataServiceImpl;
 import org.ion.util.Startable;
@@ -31,26 +30,28 @@ public class IONComponent implements Startable{
    */
 
   private final UserDataService _userDataService;
-  private final TransactionService _transactionService;
+//  private final TransactionService _transactionService;
 
   /**
    *  the next part is the controller section
    */
 
-  private final IONMobileController _mobileController;
+//  private final IONMobileController _mobileController;
+  private final UserAPI _userAPI;
 
 
   public IONComponent() {
-    _customerDataAccessorImpl = new AccountDataAccessorImpl();
+    _customerDataAccessorImpl = new AccountDataAccessorMockImpl();
     _authorizationDataAccessor = new AuthorizationDataAccessorImpl();
     _accountSavingAccessor = new AccountSavingAccessorImpl();
 
 
 
     _userDataService = new UserDataServiceImpl(_customerDataAccessorImpl);
-    _transactionService = new TransactionServiceImpl(accou)
+//    _transactionService = new TransactionServiceImpl(accou)
 
-    _mobileController = new IONMobileController(_userDataService);
+//    _mobileController = new IONMobileController(_userDataService);
+    _userAPI = new UserAPIImpl(_userDataService);
   }
 
   @Override
@@ -67,7 +68,7 @@ public class IONComponent implements Startable{
     return _userDataService;
   }
 
-  public TransactionService getTransactionService() {
-    return _transactionService;
-  }
+//  public TransactionService getTransactionService() {
+//    return _transactionService;
+//  }
 }

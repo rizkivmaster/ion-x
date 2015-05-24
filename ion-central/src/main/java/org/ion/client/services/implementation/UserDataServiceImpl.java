@@ -1,18 +1,15 @@
 package org.ion.client.services.implementation;
 
 import org.ion.client.accessors.AccountDataAccessor;
-import org.ion.client.domain.enumeration.SexType;
-import org.ion.client.domain.user.Customer;
 import org.ion.client.services.UserDataService;
 import org.ion.client.services.util.CustomerReadDetailResult;
 import org.ion.client.services.util.CustomerReadDetailSpec;
-import org.ion.client.services.util.RegistrationConfirmationResult;
-import org.ion.client.services.util.RegistrationConfirmationSpec;
-import org.ion.client.services.util.RegistrationCreationResult;
-import org.ion.client.services.util.RegistrationCreationSpec;
-import org.ion.client.services.util.RegistrationDeletionResult;
-import org.ion.client.services.util.RegistrationDeletionSpec;
-import org.joda.time.DateTime;
+import org.ion.client.services.util.UserRegistrationConfirmationResult;
+import org.ion.client.services.util.UserRegistrationConfirmationSpec;
+import org.ion.client.services.util.UserRegistrationCreationResult;
+import org.ion.client.services.util.UserRegistrationCreationSpec;
+import org.ion.client.services.util.UserRegistrationDeletionResult;
+import org.ion.client.services.util.UserRegistrationDeletionSpec;
 
 /**
  * Created by rizkivmaster on 4/24/15.
@@ -26,7 +23,7 @@ public class UserDataServiceImpl implements UserDataService {
 
  //TODO implement password hashing
   @Override
-  public RegistrationCreationResult createRegistration(RegistrationCreationSpec registrationCreationSpec) {
+  public UserRegistrationCreationResult createUserRegistration(UserRegistrationCreationSpec userRegistrationCreationSpec) {
 //    _customerDataAccessor.insertNewCustomer(
 //        registrationCreationSpec.getUsername(),
 //        registrationCreationSpec.getPassword(),
@@ -44,13 +41,13 @@ public class UserDataServiceImpl implements UserDataService {
   }
 
   @Override
-  public RegistrationDeletionResult deleteRegistration(RegistrationDeletionSpec registrationDeletionSpec) {
+  public UserRegistrationDeletionResult deleteUserRegistration(UserRegistrationDeletionSpec userRegistrationDeletionSpec) {
 
     return null;
   }
 
   @Override
-  public RegistrationConfirmationResult confirmRegistration(RegistrationConfirmationSpec registrationConfirmationSpec) {
+  public UserRegistrationConfirmationResult confirmUserRegistration(UserRegistrationConfirmationSpec userRegistrationConfirmationSpec) {
     return null;
   }
 

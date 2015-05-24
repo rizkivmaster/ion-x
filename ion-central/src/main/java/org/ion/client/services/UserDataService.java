@@ -2,12 +2,13 @@ package org.ion.client.services;
 
 import org.ion.client.services.util.CustomerReadDetailResult;
 import org.ion.client.services.util.CustomerReadDetailSpec;
-import org.ion.client.services.util.RegistrationConfirmationResult;
-import org.ion.client.services.util.RegistrationConfirmationSpec;
-import org.ion.client.services.util.RegistrationCreationResult;
-import org.ion.client.services.util.RegistrationCreationSpec;
-import org.ion.client.services.util.RegistrationDeletionResult;
-import org.ion.client.services.util.RegistrationDeletionSpec;
+import org.ion.client.services.util.UserRegistrationConfirmationResult;
+import org.ion.client.services.util.UserRegistrationConfirmationSpec;
+import org.ion.client.services.util.UserRegistrationCreationResult;
+import org.ion.client.services.util.UserRegistrationCreationSpec;
+import org.ion.client.services.util.UserRegistrationDeletionResult;
+import org.ion.client.services.util.UserRegistrationDeletionSpec;
+import org.ionexchange.v1.objects.UserDetailRetrievalRequest;
 
 /**
  * Created by rizkivmaster on 4/23/15.
@@ -15,9 +16,15 @@ import org.ion.client.services.util.RegistrationDeletionSpec;
 public interface UserDataService {
 
 
-  public RegistrationCreationResult createRegistration(RegistrationCreationSpec registrationCreationSpec);
-  public RegistrationDeletionResult deleteRegistration(RegistrationDeletionSpec registrationDeletionSpec);
-  public RegistrationConfirmationResult confirmRegistration(RegistrationConfirmationSpec registrationConfirmationSpec);
+  UserRegistrationCreationResult createUserRegistration(UserRegistrationCreationSpec userRegistrationCreationSpec);
+  UserRegistrationDeletionResult deleteUserRegistration(UserRegistrationDeletionSpec userRegistrationDeletionSpec);
+  UserRegistrationConfirmationResult confirmUserRegistration(UserRegistrationConfirmationSpec userRegistrationConfirmationSpec);
+  UserLoginConfirmationResult confirmUserLogin(UserLoginConfirmationSpec userLoginConfirmationSpec);
+  UserLogoutConfirmationResult confirmUserLogout(UserLogoutConfirmationSpec userLogoutConfirmationSpec);
+
+  UserDetailRetrievalResult getUserDetail(UserDetailRetrievalSpec userDetailRetrievalSpec);
+  AddUserContactResult addUserContact(AddUserContactSpec addUserContactSpec);
+  UserContactConfirmationResult confirmUserContact(UserContactConfirmationSpec userContactConfirmationSpec);
 
   /*
   public GroupCreationResult createGroup(GroupCreationSpec groupCreationSpec);

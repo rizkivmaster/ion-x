@@ -10,10 +10,10 @@ import java.util.Random;
 /**
  * // TODO Comment
  */
-public abstract class IONServiceIntegrationTestBase extends IONIntegrationTestBase {
-                    /*
+/*public abstract class IONServiceIntegrationTestBase extends IONIntegrationTestBase {
+                    *//*
    * utilities
-   */
+   *//*
 
   private final Random random = new Random();
 
@@ -23,9 +23,9 @@ public abstract class IONServiceIntegrationTestBase extends IONIntegrationTestBa
   }
 
 
-  /*
+  *//*
    * services
-   */
+   *//*
 
   private final TransactionService _transactionService;
   private final UserDataService _userDataService;
@@ -35,4 +35,4 @@ public abstract class IONServiceIntegrationTestBase extends IONIntegrationTestBa
     _userDataService = getUserDataService();
   }
 
-}
+}*/

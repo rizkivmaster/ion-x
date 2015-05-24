@@ -21,7 +21,7 @@ public class KickStarter implements CommandLineRunner {
 //    UserDataService userDataService = ionComponent.getUserDataService();
 //    Builder registrationCreationSpecBuilder = new Builder();
 //    RegistrationCreationSpec registrationCreationSpec = registrationCreationSpecBuilder.setUsername("test").setEmail("test@gmail.com").createRegistrationCreationSpec();
-//    userDataService.createRegistration(registrationCreationSpec);
+//    userDataService.createUserRegistration(registrationCreationSpec);
 //    CustomerReadDetailSpec customerReadDetailSpec = new CustomerReadDetailSpec("test");
 //    CustomerReadDetailResult customerReadDetailResult = userDataService.readCustomerDetail(customerReadDetailSpec);
 //    System.out.println(customerReadDetailResult.getCustomer().getEmail());
