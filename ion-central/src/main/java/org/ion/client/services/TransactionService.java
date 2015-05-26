@@ -9,6 +9,7 @@ import org.ion.client.services.util.TopUpConfirmationSpec;
 import org.ion.client.services.util.TopUpConfirmationResult;
 import org.ion.client.services.util.TopUpTokenCreationResult;
 import org.ion.client.services.util.TopUpTokenCreationSpec;
+import org.ionexchange.v1.objects.RequestTopupTokenRequest;
 
 /**
  * Created by rizkivmaster on 4/23/15.
@@ -18,7 +19,6 @@ public interface TransactionService {
   /*
    * TopUp related service
    */
-
 
   public void reloadBalance(BankAccount srcBankAccount, SavingAccount dstSavingAccount,long amount) throws Exception;
 

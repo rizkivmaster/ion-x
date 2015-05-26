@@ -4,12 +4,12 @@ import org.ion.client.accessors.AccountDataAccessor;
 import org.ion.client.services.UserDataService;
 import org.ion.client.services.util.CustomerReadDetailResult;
 import org.ion.client.services.util.CustomerReadDetailSpec;
+import org.ion.client.services.util.UserCreationSpec;
+import org.ion.client.services.util.UserDeletionSpec;
 import org.ion.client.services.util.UserRegistrationConfirmationResult;
 import org.ion.client.services.util.UserRegistrationConfirmationSpec;
 import org.ion.client.services.util.UserRegistrationCreationResult;
-import org.ion.client.services.util.UserRegistrationCreationSpec;
 import org.ion.client.services.util.UserRegistrationDeletionResult;
-import org.ion.client.services.util.UserRegistrationDeletionSpec;
 
 /**
  * Created by rizkivmaster on 4/24/15.
@@ -23,7 +23,7 @@ public class UserDataServiceImpl implements UserDataService {
 
  //TODO implement password hashing
   @Override
-  public UserRegistrationCreationResult createUserRegistration(UserRegistrationCreationSpec userRegistrationCreationSpec) {
+  public UserRegistrationCreationResult createUserRegistration(UserCreationSpec userCreationSpec) {
 //    _customerDataAccessor.insertNewCustomer(
 //        registrationCreationSpec.getUsername(),
 //        registrationCreationSpec.getPassword(),
@@ -41,7 +41,7 @@ public class UserDataServiceImpl implements UserDataService {
   }
 
   @Override
-  public UserRegistrationDeletionResult deleteUserRegistration(UserRegistrationDeletionSpec userRegistrationDeletionSpec) {
+  public UserRegistrationDeletionResult deleteUserRegistration(UserDeletionSpec userDeletionSpec) {
 
     return null;
   }

@@ -3,10 +3,10 @@ package org.ionexchange.v1.objects;
 /**
  * // TODO Comment
  */
-public class AddUserContactRequest {
+public class UserDetailRequest extends APIRequest {
   private String _userId;
 
-  public AddUserContactRequest() {
+  public UserDetailRequest() {
   }
 
   public String getUserId() {

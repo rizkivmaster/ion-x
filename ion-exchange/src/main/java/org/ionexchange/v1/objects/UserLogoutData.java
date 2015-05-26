@@ -3,11 +3,11 @@ package org.ionexchange.v1.objects;
 /**
  * // TODO Comment
  */
-public class UserLogoutRequest {
+public class UserLogoutData {
   private String _userId;
   private String _sessionId;
 
-  public UserLogoutRequest() {
+  public UserLogoutData() {
   }
 
   public String getUserId() {

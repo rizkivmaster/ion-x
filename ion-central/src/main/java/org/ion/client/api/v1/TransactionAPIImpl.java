@@ -1,6 +1,7 @@
 package org.ion.client.api.v1;
 
 import org.ion.client.services.EntityIdGeneratorService;
+import org.ion.client.services.TopupTokenCreationData;
 import org.ionexchange.v1.objects.*;
 
 /**
@@ -14,7 +15,8 @@ public class TransactionAPIImpl extends IONAPIBase implements TransactionAPI {
 
   @Override
   public RequestTopupTokenRequest requestTopupToken(RequestTopupTokenSpec requestTopupTokenSpec) {
-
+    TopupTokenCreationData topupTokenCreationData = new TopupTokenCreationData();
+    topupTokenCreationData
     return null;  // TODO impl
   }
 

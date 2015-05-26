@@ -3,7 +3,7 @@ package org.ionexchange.v1.objects;
 /**
  * // TODO Comment
  */
-public class UserRegistrationConfirmationRequest extends APIRequest{
+public class UserRegistrationConfirmationData extends APIRequest{
   private String _userId;
   private String _confirmationCode;
 

@@ -33,7 +33,7 @@ public class IONMobileController {
         .setPhoneNumber(request.getPhoneNumber())
         .setAddress(request.getAddress())
         .createRegistrationCreationSpec();
-    _userDataService.createUserRegistration(registrationCreationSpec);
+    _userDataService.createNewUser(registrationCreationSpec);
     return request;
   }*/
 /*

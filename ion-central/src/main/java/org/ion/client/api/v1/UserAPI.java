@@ -10,18 +10,18 @@ import java.io.IOException;
  */
 @Controller
 public interface UserAPI {
-  UserLoginConfirmationResponse confirmUserLogin(UserLoginConfirmationRequest userLoginConfirmationRequest) throws IOException;
+  APIResponse<String> userLogin(APIRequest<UserLoginData> apiRequest) throws IOException;
 
-  UserRegistrationCreationResponse createUserRegistration(UserRegistrationCreationRequest userRegistrationCreationRequest) throws IOException;
+  APIResponse<Void> registerUser(APIRequest<UserRegistrationData> apiRequest) throws IOException;
 
-  UserRegistrationConfirmationResponse confirmUserRegistration(UserRegistrationConfirmationRequest userRegistrationConfirmationRequest) throws IOException;
+  APIResponse<Void> confirmUserRegistration(APIRequest<UserRegistrationConfirmationData> apiRequest) throws IOException;
 
-  UserLogoutResponse confirmUserLogout(UserLogoutRequest userLogoutRequest) throws IOException;
+  APIResponse<Void> confirmUserLogout(APIRequest<UserLogoutData> apiRequest) throws IOException;
 
-  UserDetailRetrievalResponse retrieveUserDetail(UserDetailRetrievalRequest userDetailRetrievalRequest) throws IOException;
+  APIResponse<Void> retrieveUserDetail(APIRequest<UserDetailRequest> apiRequest) throws IOException;
 
-  AddUserContactResponse addUserContact(AddUserContactRequest addUserContactRequest) throws IOException;
+  APIResponse<Void> addUserContact(APIRequest<AddUserContactData> apiRequest) throws IOException;
 
-  UserContactConfirmationResponse confirmUserContactInvitation(UserContactConfirmationRequest userContactConfirmationRequest) throws IOException;
+  APIResponse<Void> confirmUserContactInvitation(APIRequest<UserContactConfirmationData> apiRequest) throws IOException;
 }
 

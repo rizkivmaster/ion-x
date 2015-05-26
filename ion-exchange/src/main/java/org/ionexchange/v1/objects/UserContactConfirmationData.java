@@ -3,10 +3,10 @@ package org.ionexchange.v1.objects;
 /**
  * // TODO Comment
  */
-public class UserContactConfirmationRequest {
+public class UserContactConfirmationData {
   private String _userContactInvitationId;
 
-  public UserContactConfirmationRequest() {
+  public UserContactConfirmationData() {
   }
 
   public String getUserContactInvitationId() {

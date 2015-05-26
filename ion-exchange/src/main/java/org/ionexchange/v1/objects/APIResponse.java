@@ -5,9 +5,13 @@ import org.ionexchange.v1.APIResponseStatus;
 /**
  * // TODO Comment
  */
-public abstract class APIResponse {
+public class APIResponse<T> {
   private APIResponseStatus _apiResponseStatus;
-  private String _reason;
+  private String _failedReason;
+  private T _data;
+
+  public APIResponse() {
+  }
 
   public APIResponseStatus getApiResponseStatus() {
     return _apiResponseStatus;
@@ -17,11 +21,19 @@ public abstract class APIResponse {
     _apiResponseStatus = apiResponseStatus;
   }
 
-  public String getReason() {
-    return _reason;
+  public String getFailedReason() {
+    return _failedReason;
   }
 
-  public void setReason(String reason) {
-    _reason = reason;
+  public void setFailedReason(String failedReason) {
+    _failedReason = failedReason;
+  }
+
+  public T getData() {
+    return _data;
+  }
+
+  public void setData(T data) {
+    _data = data;
   }
 }

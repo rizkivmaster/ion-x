@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import org.ionexchange.v1.SexType;
 import org.ionexchange.v0.UserRegistrationRequest;
-import org.ionexchange.v1.objects.UserRegistrationCreationRequest;
+import org.ionexchange.v1.objects.UserRegistrationData;
 import org.ionexchange.v1.objects.UserRegistrationCreationResponse;
 import org.ionexchange.v1.router.Routers;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
     String gender = "male";
     String phoneNumber = "800409769834";
     String address = "jalan jalan";
-    UserRegistrationCreationRequest registrationCreationSpec = new UserRegistrationCreationRequest();
+    UserRegistrationData registrationCreationSpec = new UserRegistrationData();
     registrationCreationSpec.setUsername(username);
     registrationCreationSpec.setFirstName(firstName);
     registrationCreationSpec.setLastName(lastName);

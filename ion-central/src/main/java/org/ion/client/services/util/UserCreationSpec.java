@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Created by rizkivmaster on 4/24/15.
  */
-public class UserRegistrationCreationSpec implements Serializable {
+public class UserCreationSpec implements Serializable {
   private String _firstName;
   private String _lastName;
   private String _email;

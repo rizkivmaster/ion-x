@@ -28,7 +28,7 @@ public class UserAPIMockImpl extends IONAPIBase  {
 
   @RequestMapping(value= Routers.USER_REGISTRATION_CREATION,method = RequestMethod.POST)
   public @ResponseBody
-  UserRegistrationCreationResponse createUserRegistration(@RequestBody UserRegistrationCreationRequest userRegistrationCreationRequest) throws IOException{
+  UserRegistrationCreationResponse createNewUser(@RequestBody UserRegistrationCreationRequest userRegistrationCreationRequest) throws IOException{
     return okResponse(UserRegistrationCreationResponse.class);
   }
 

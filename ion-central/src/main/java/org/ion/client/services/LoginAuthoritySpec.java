@@ -1,13 +1,13 @@
-package org.ionexchange.v1.objects;
+package org.ion.client.services;
 
 /**
  * // TODO Comment
  */
-public class UserLoginConfirmationRequest extends APIRequest {
+public class LoginAuthoritySpec {
   private String _username;
   private String _password;
 
-  public UserLoginConfirmationRequest() {
+  public LoginAuthoritySpec() {
   }
 
   public String getUsername() {

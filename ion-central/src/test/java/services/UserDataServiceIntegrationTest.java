@@ -38,7 +38,7 @@ public class UserDataServiceIntegrationTest extends IONServiceIntegrationTestBas
         .setPhoneNumber("0812412453")
         .setAddress("Jalan Aksara")
         .createRegistrationCreationSpec();
-    userDataService.createUserRegistration(registrationCreationSpec);
+    userDataService.createNewUser(registrationCreationSpec);
     CustomerReadDetailSpec customerReadDetailSpec = new CustomerReadDetailSpec("rosto");
     CustomerReadDetailResult customerReadDetailResult = userDataService.readCustomerDetail(customerReadDetailSpec);
     assertEquals(customerReadDetailResult.getCustomer().getPhoneNumber(),registrationCreationSpec.getPhoneNumber());
@@ -58,7 +58,7 @@ public class UserDataServiceIntegrationTest extends IONServiceIntegrationTestBas
         .setPhoneNumber("0812412453")
         .setAddress("Jalan Aksara")
         .createUserRegistrationRequest();
-//    userDataService.createUserRegistration(registrationCreationSpec);
+//    userDataService.createNewUser(registrationCreationSpec);
 //    CustomerReadDetailResult customerReadDetailResult = userDataService.readCustomerDetail(customerReadDetailSpec);
     RestTemplate restTemplate = new RestTemplate();
     restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
