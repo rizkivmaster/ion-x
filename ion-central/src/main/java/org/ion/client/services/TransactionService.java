@@ -1,5 +1,6 @@
 package org.ion.client.services;
 
+import org.ion.client.domain.TransactionAlias;
 import org.ion.client.domain.transaction.SavingAccount;
 import org.ion.client.domain.user.Account;
 import org.ion.client.domain.user.BankAccount;
@@ -11,6 +12,8 @@ import org.ion.client.services.util.TopUpTokenCreationResult;
 import org.ion.client.services.util.TopUpTokenCreationSpec;
 import org.ionexchange.v1.objects.RequestTopupTokenRequest;
 
+import java.io.IOException;
+
 /**
  * Created by rizkivmaster on 4/23/15.
  */
@@ -19,6 +22,10 @@ public interface TransactionService {
   /*
    * TopUp related service
    */
+
+  TransactionAlias getTransactionAliasbyUsername(String username) throws IOException;
+
+  void createP2PTransaction(TransactionAlias creatorAlias, TransactionAlias attendantAlias) throws IOException;
 
   public void reloadBalance(BankAccount srcBankAccount, SavingAccount dstSavingAccount,long amount) throws Exception;
 

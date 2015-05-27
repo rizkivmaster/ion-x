@@ -3,10 +3,10 @@ package org.ion.client.services;
 /**
  * // TODO Comment
  */
-public class UserDetailSpec {
+public class UserDetailRetrievalSpec {
   private String _userId;
 
-  public UserDetailSpec() {
+  public UserDetailRetrievalSpec() {
   }
 
   public String getUserId() {

@@ -5,7 +5,7 @@ import org.ionexchange.v1.SexType;
 /**
  * // TODO Comment
  */
-public class UserRegistrationData extends APIRequest {
+public class UserRegistrationData {
   private String _username;
   private String _firstName;
   private String _lastName;
@@ -13,6 +13,16 @@ public class UserRegistrationData extends APIRequest {
   private SexType _gender;
   private String _phoneNumber;
   private String _address;
+
+  public String getSessionId() {
+    return _sessionId;
+  }
+
+  public void setSessionId(String sessionId) {
+    _sessionId = sessionId;
+  }
+
+  private String _sessionId;
 
   public UserRegistrationData() {
   }

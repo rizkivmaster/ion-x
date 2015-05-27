@@ -14,7 +14,7 @@ public interface UserDataService {
   void createNewUser(UserCreationSpec userCreationSpec);
   void deleteUser(UserDeletionSpec userDeletionSpec);
   User getUserByUsername(String username);
-  UserDetail getUserDetail(UserDetailSpec userDetailSpec);
+  User getUserById(String userId);
 
 
   /*

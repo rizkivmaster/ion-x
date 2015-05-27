@@ -3,7 +3,7 @@ package org.ionexchange.v1.objects;
 /**
  * // TODO Comment
  */
-public class UserLoginData extends APIRequest {
+public class UserLoginData  {
   private String _username;
   private String _password;
 
