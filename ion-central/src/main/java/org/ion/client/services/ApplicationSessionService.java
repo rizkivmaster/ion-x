@@ -19,4 +19,8 @@ public interface ApplicationSessionService {
   void createP2PTransactionSession(P2PTransactionSessionSpec spec) throws IOException;
 
   P2PTransactionSessionData getP2PTransactionSession(String sessionId) throws IOException;
+
+  P2PTopupSessionData createTopupSession(P2PTopupSessionSpec spec) throws IOException;
+
+  P2PTopupSessionData getTopupSession(String sessionId);
 }

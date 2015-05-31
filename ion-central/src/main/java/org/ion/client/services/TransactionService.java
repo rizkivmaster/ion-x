@@ -1,16 +1,9 @@
 package org.ion.client.services;
 
+import org.ion.client.api.v1.TransactionProxy;
 import org.ion.client.domain.TransactionAlias;
-import org.ion.client.domain.transaction.SavingAccount;
-import org.ion.client.domain.user.Account;
+import org.ion.client.domain.transaction.IONSavingAccount;
 import org.ion.client.domain.user.BankAccount;
-import org.ion.client.services.util.TopUpCancellationResult;
-import org.ion.client.services.util.TopUpCancellationSpec;
-import org.ion.client.services.util.TopUpConfirmationSpec;
-import org.ion.client.services.util.TopUpConfirmationResult;
-import org.ion.client.services.util.TopUpTokenCreationResult;
-import org.ion.client.services.util.TopUpTokenCreationSpec;
-import org.ionexchange.v1.objects.RequestTopupTokenRequest;
 
 import java.io.IOException;
 
@@ -27,11 +20,23 @@ public interface TransactionService {
 
   void createP2PTransaction(TransactionAlias creatorAlias, TransactionAlias attendantAlias) throws IOException;
 
-  public void reloadBalance(BankAccount srcBankAccount, SavingAccount dstSavingAccount,long amount) throws Exception;
+  BankAccount getBankAccountById(String id);
 
-  public void unloadBalance(SavingAccount srcSavingAccount, BankAccount dstBankAccount, long amount) throws  Exception;
+  void reloadBalance(BankAccount srcBankAccount, IONSavingAccount dstIONSavingAccount,long amount) throws Exception;
 
-  public void transferP2P(SavingAccount srcSavingAccount, SavingAccount dstSavingAccount, long amount) throws  Exception;
+  void unloadBalance(IONSavingAccount srcIONSavingAccount, BankAccount dstBankAccount, long amount) throws  Exception;
+
+
+
+  IONSavingAccount getDefaultIONSavingAccount(User user);
+
+  TransactionProxy getTransactionProxybyId(String id);
+
+  TransactionProxy getP2PPartnerInGroupByTransactionId(String id);
+
+  P2PTransactionGroup getP2PTransactionGroupById(String id);
+
+  void createP2PTextTransaction(TransactionProxy transactionProxy, String text);
 
 
 //  public TopUpConfirmationResult confirmTopUp(TopUpConfirmationSpec topUpConfirmationRequestSpec);

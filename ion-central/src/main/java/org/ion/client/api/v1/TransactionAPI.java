@@ -1,5 +1,6 @@
 package org.ion.client.api.v1;
 
+import org.ion.client.services.TopupToken;
 import org.ionexchange.v1.objects.*;
 
 import java.io.IOException;
@@ -13,17 +14,15 @@ public interface TransactionAPI {
 
   APIResponse<Void> acceptP2PTransaction(APIRequest<ApproveP2PTransactionSpec> request) throws IOException;
 
-  APIResponse<Void> requestTopupToken(APIRequest<RequestTopupTokenSpec> request);
+  APIResponse<TopupToken> requestTopupToken(APIRequest<RequestTopupTokenSpec> request) throws IOException;
 
-  APIResponse<Void> confirmTopupToken(APIRequest<ConfirmTopupTokenSpec> request);
+  APIResponse<Void> createP2PMoneyTransfer(APIRequest<CreateP2PMoneyTransferSpec> request) throws IOException;
 
-  APIResponse<Void> createP2PMoneyTransfer(CreateP2PMoneyTransferSpec createP2PMoneyTransferSpec);
+  APIResponse<Void> getIncomingMoneyTransactionResult(APIRequest<GetIncomingMoneyTransactionSpec> request) throws IOException;
 
-  APIResponse<Void> getIncomingMoneyTransactionResult(GetIncomingMoneyTransactionSpec getIncomingMoneyTransactionSpec);
+  APIResponse<Void> createTextTransfer(APIRequest<CreateTextTransferSpec> request) throws IOException;
 
-  APIResponse<Void> createTextTransfer(CreateTextTransferSpec createTextTransferSpec);
+  APIResponse<Void> getIncomingMessages(APIRequest<GetIncomingMessagesSpec> request) throws IOException;
 
-  APIResponse<Void> getIncomingMessages(GetIncomingMessagesSpec getIncomingMessagesSpec);
-
-  APIResponse<Void> createToBankTransfer(ToBankTransferCreationSpec toBankTransferCreationSpec);
+  APIResponse<Void> createToBankTransfer(APIRequest<ToBankTransferCreationSpec> request) throws IOException;
 }

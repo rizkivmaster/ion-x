@@ -1,7 +1,7 @@
 package org.ion.client.accessors.implementation;
 
 import org.ion.client.accessors.AccountSavingAccessor;
-import org.ion.client.domain.transaction.SavingAccount;
+import org.ion.client.domain.transaction.IONSavingAccount;
 import org.ion.client.domain.user.Account;
 
 /**
@@ -9,12 +9,12 @@ import org.ion.client.domain.user.Account;
  */
 public class AccountSavingAccessorImpl implements AccountSavingAccessor {
   @Override
-  public SavingAccount getSavingAccount(Account account) {
+  public IONSavingAccount getSavingAccount(Account account) {
     return null;  // TODO impl
   }
 
   @Override
-  public void upsertSavingAccount(SavingAccount savingAccount) {
+  public void upsertSavingAccount(IONSavingAccount IONSavingAccount) {
     // TODO impl
   }
 }

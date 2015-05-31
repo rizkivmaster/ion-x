@@ -1,14 +1,9 @@
 package org.ion.client.api.v1;
 
 import org.ion.client.domain.TransactionAlias;
-import org.ion.client.domain.transaction.Transaction;
-import org.ion.client.services.ApplicationSessionService;
-import org.ion.client.services.EntityIdGeneratorService;
-import org.ion.client.services.P2PTransactionSessionData;
-import org.ion.client.services.P2PTransactionSessionSpec;
-import org.ion.client.services.P2PTransactionSessionStatus;
-import org.ion.client.services.TopupTokenCreationData;
-import org.ion.client.services.TransactionService;
+import org.ion.client.domain.transaction.IONSavingAccount;
+import org.ion.client.domain.user.BankAccount;
+import org.ion.client.services.*;
 import org.ionexchange.v1.objects.*;
 
 import java.io.IOException;
@@ -20,6 +15,9 @@ public class TransactionAPIImpl extends IONAPIBase implements TransactionAPI {
   private EntityIdGeneratorService _entityIdGeneratorService;
   private TransactionService _transactionService;
   private ApplicationSessionService _applicationSessionService;
+  private FinancialTransactionService _financialTransactionService;
+  private SavingsAccountService _savingsAccountService;
+  private UserDataService _userDataService;
 
   public TransactionAPIImpl() {
   }
@@ -74,4 +72,132 @@ public class TransactionAPIImpl extends IONAPIBase implements TransactionAPI {
     }
     return failedResponse("The system does not recognize the transaction");
   }
+
+  @Override
+  public APIResponse<TopupToken> requestTopupToken(APIRequest<RequestTopupTokenSpec> request) throws IOException{
+    assert request!=null;
+    assert request.getData()!=null;
+
+    BankAccount bankAccount = _transactionService.getBankAccountById(request.getData().getSavingAccountId());
+    if(bankAccount!=null){
+      P2PTopupSessionSpec p2PTopupSessionSpec = new P2PTopupSessionSpec();
+      p2PTopupSessionSpec.setBankAccountTarget(bankAccount);
+      P2PTopupSessionData p2PTopupSessionData = _applicationSessionService.createTopupSession(p2PTopupSessionSpec);
+      TopupToken topupToken = new TopupToken();
+      topupToken.setToken(p2PTopupSessionData.getToken());
+      return okResponse(topupToken);
+    }
+    else
+    {
+      return failedResponse("The bank account does not exist");
+    }
+  }
+
+  @Override
+  public APIResponse<Void> createP2PMoneyTransfer(APIRequest<CreateP2PMoneyTransferSpec> request) throws IOException {
+    assert request!=null;
+    assert request.getData()!=null;
+
+    if(request.getData().getAmount()>0) {
+      TransactionProxy srcTransactionProxy = _transactionService.getTransactionProxybyId(request.getData().getTransactionProxyId());
+      if (srcTransactionProxy != null) {
+        TransactionProxy dstTransactionProxy = _transactionService.getP2PPartnerInGroupByTransactionId(request.getData().getTransactionProxyId());
+        if (dstTransactionProxy != null) {
+          IONSavingAccount srcSavingAccount = _financialTransactionService.getDefaultSavingAccountByTransactionProxy(srcTransactionProxy);
+          if (srcSavingAccount != null) {
+            IONSavingAccount dstSavingAccount = _financialTransactionService.getDefaultSavingAccountByTransactionProxy(dstTransactionProxy);
+            if (dstSavingAccount != null) {
+              if (srcSavingAccount.getAmount() >= request.getData().getAmount()) {
+                _savingsAccountService.moveMoneyInterSavingsAccount(srcSavingAccount, dstSavingAccount, request.getData().getAmount());
+                return okResponse();
+              } else {
+                return failedResponse("The saving amount is not sufficient for transfer");
+              }
+            } else {
+              return failedResponse("The destination account is not available");
+            }
+          } else {
+            return failedResponse("User has no a default saving account");
+          }
+        } else {
+          return failedResponse("The destination user is not in contact");
+        }
+      } else {
+        return failedResponse("The user has no transaction alias");
+      }
+    }
+    else
+    {
+      return failedResponse("The amount must be more that zero");
+    }
+  }
+
+  @Override
+  public APIResponse<Void> getIncomingMoneyTransactionResult(APIRequest<GetIncomingMoneyTransactionSpec> request) throws IOException {
+    return null;  // TODO impl
+  }
+
+  @Override
+  public APIResponse<Void> createTextTransfer(APIRequest<CreateTextTransferSpec> request) throws IOException {
+    assert request!=null;
+    assert request.getData()!=null;
+
+    TransactionProxy srcTransactionProxy = _transactionService.getTransactionProxybyId(request.getData().getTransactionProxyId());
+    if(srcTransactionProxy!=null)
+    {
+      _transactionService.createP2PTextTransaction(srcTransactionProxy,request.getData().getText());
+      return okResponse();
+    }
+    else
+    {
+      return failedResponse("The user has no contact with destination user");
+    }
+  }
+
+  @Override
+  public APIResponse<Void> getIncomingMessages(APIRequest<GetIncomingMessagesSpec> request) throws IOException {
+    return null;  // TODO impl
+  }
+
+  @Override
+  public APIResponse<Void> createToBankTransfer(APIRequest<ToBankTransferCreationSpec> request) throws IOException {
+    assert request!=null;
+    assert request.getData()!=null;
+
+    if(request.getData().getAmount()>0) {
+      User user = _userDataService.getUserById(request.getData().getUserId());
+      if (user != null) {
+        BankAccount dstBankAccount = _savingsAccountService.getBankAccountById(request.getData().getUserId());
+        if (dstBankAccount != null) {
+          IONSavingAccount srcIONSavingAccount = _savingsAccountService.getDefaultIONSavingsAccountByUserId(request.getData().getUserId());
+          if(srcIONSavingAccount!=null)
+          {
+            if(srcIONSavingAccount.getAmount()>request.getData().getAmount())
+            {
+              _savingsAccountService.moveMoneyFromInternalToBank(srcIONSavingAccount,dstBankAccount);
+              return okResponse();
+            }
+            else
+            {
+              return failedResponse("The saving amount is not sufficient for bank transfer");
+            }
+          }
+          else
+          {
+            return failedResponse("The default saving account does not exist");
+          }
+        } else {
+          return failedResponse("The destination bank account does not exist");
+        }
+      } else {
+        return failedResponse("The user does not exist");
+      }
+    }
+    else
+    {
+      return failedResponse("The transfer amount must be more than zero");
+    }
+  }
+
+
 }

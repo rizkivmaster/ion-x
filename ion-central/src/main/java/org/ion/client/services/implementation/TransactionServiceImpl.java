@@ -2,8 +2,7 @@ package org.ion.client.services.implementation;
 
 import org.ion.client.accessors.AccountSavingAccessor;
 import org.ion.client.accessors.AccountDataAccessor;
-import org.ion.client.domain.transaction.SavingAccount;
-import org.ion.client.domain.user.Account;
+import org.ion.client.domain.transaction.IONSavingAccount;
 import org.ion.client.domain.user.BankAccount;
 import org.ion.client.services.BankAccountTransactionService;
 import org.ion.client.services.TransactionService;
@@ -27,38 +26,38 @@ public class TransactionServiceImpl implements TransactionService {
 
 
   @Override
-  public void reloadBalance(BankAccount srcBankAccount, SavingAccount dstSavingAccount, long amount) throws Exception {
+  public void reloadBalance(BankAccount srcBankAccount, IONSavingAccount dstIONSavingAccount, long amount) throws Exception {
     assert amount > 0;
     assert srcBankAccount!=null;
-    assert dstSavingAccount!=null;
+    assert dstIONSavingAccount !=null;
     //to where?
     _bankAccountTransactionService.transferP2P(srcBankAccount,_ionBankAccount, amount);
-    dstSavingAccount.setAmount(dstSavingAccount.getAmount()+amount);
-    _accountSavingAccessor.upsertSavingAccount(dstSavingAccount);
+    dstIONSavingAccount.setAmount(dstIONSavingAccount.getAmount()+amount);
+    _accountSavingAccessor.upsertSavingAccount(dstIONSavingAccount);
 
   }
 
   @Override
-  public void transferP2P(SavingAccount srcSavingAccount, SavingAccount dstSavingAccount, long amount) throws Exception {
+  public void transferP2P(IONSavingAccount srcIONSavingAccount, IONSavingAccount dstIONSavingAccount, long amount) throws Exception {
     assert amount>0;
-    assert srcSavingAccount!=null;
-    assert dstSavingAccount!=null;
-    assert srcSavingAccount.getAmount()>amount;
-    dstSavingAccount.setAmount(dstSavingAccount.getAmount()-amount);
-    srcSavingAccount.setAmount(srcSavingAccount.getAmount()-amount);
-    _accountSavingAccessor.upsertSavingAccount(srcSavingAccount);
-    _accountSavingAccessor.upsertSavingAccount(dstSavingAccount);
+    assert srcIONSavingAccount !=null;
+    assert dstIONSavingAccount !=null;
+    assert srcIONSavingAccount.getAmount()>amount;
+    dstIONSavingAccount.setAmount(dstIONSavingAccount.getAmount()-amount);
+    srcIONSavingAccount.setAmount(srcIONSavingAccount.getAmount()-amount);
+    _accountSavingAccessor.upsertSavingAccount(srcIONSavingAccount);
+    _accountSavingAccessor.upsertSavingAccount(dstIONSavingAccount);
   }
 
   @Override
-  public void unloadBalance(SavingAccount srcSavingAccount, BankAccount dstBankAccount, long amount) throws Exception {
+  public void unloadBalance(IONSavingAccount srcIONSavingAccount, BankAccount dstBankAccount, long amount) throws Exception {
     assert amount>0;
-    assert srcSavingAccount!=null;
+    assert srcIONSavingAccount !=null;
     assert dstBankAccount!=null;
-    assert srcSavingAccount.getAmount()>amount;
+    assert srcIONSavingAccount.getAmount()>amount;
     //asumsi berhasil
     _bankAccountTransactionService.transferP2P(_ionBankAccount,dstBankAccount,amount);
-    srcSavingAccount.setAmount(srcSavingAccount.getAmount()-amount);
-    _accountSavingAccessor.upsertSavingAccount(srcSavingAccount);
+    srcIONSavingAccount.setAmount(srcIONSavingAccount.getAmount()-amount);
+    _accountSavingAccessor.upsertSavingAccount(srcIONSavingAccount);
   }
 }

@@ -3,12 +3,12 @@ package org.ion.client.domain.transaction;
 /**
  * // TODO Comment
  */
-public class SavingAccount {
+public class IONSavingAccount {
   private String _id;
   private String _userid;
   private long _amount;
 
-  public SavingAccount(String id, String userid, long amount) {
+  public IONSavingAccount(String id, String userid, long amount) {
     _id = id;
     _userid = userid;
     _amount = amount;
