@@ -3,9 +3,11 @@ package org.ion.client.services;
 import org.ion.client.api.v1.TransactionProxy;
 import org.ion.client.domain.TransactionAlias;
 import org.ion.client.domain.transaction.IONSavingAccount;
+import org.ion.client.domain.transaction.Transaction;
 import org.ion.client.domain.user.BankAccount;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by rizkivmaster on 4/23/15.
@@ -17,6 +19,8 @@ public interface TransactionService {
    */
 
   TransactionAlias getTransactionAliasbyUsername(String username) throws IOException;
+
+  TransactionAlias getTransactionAliasbyId(String id);
 
   void createP2PTransaction(TransactionAlias creatorAlias, TransactionAlias attendantAlias) throws IOException;
 
@@ -37,6 +41,8 @@ public interface TransactionService {
   P2PTransactionGroup getP2PTransactionGroupById(String id);
 
   void createP2PTextTransaction(TransactionProxy transactionProxy, String text);
+
+  List<Transaction> getUnreadTransactions(TransactionAlias transactionAlias, int size, int skip);
 
 
 //  public TopUpConfirmationResult confirmTopUp(TopUpConfirmationSpec topUpConfirmationRequestSpec);

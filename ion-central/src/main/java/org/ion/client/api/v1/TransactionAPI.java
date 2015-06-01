@@ -18,11 +18,9 @@ public interface TransactionAPI {
 
   APIResponse<Void> createP2PMoneyTransfer(APIRequest<CreateP2PMoneyTransferSpec> request) throws IOException;
 
-  APIResponse<Void> getIncomingMoneyTransactionResult(APIRequest<GetIncomingMoneyTransactionSpec> request) throws IOException;
+  APIResponse<IncomingTransactionData> getIncomingTransactions(APIRequest<GetIncomingTransactionsSpec> request) throws IOException;
 
   APIResponse<Void> createTextTransfer(APIRequest<CreateTextTransferSpec> request) throws IOException;
-
-  APIResponse<Void> getIncomingMessages(APIRequest<GetIncomingMessagesSpec> request) throws IOException;
 
   APIResponse<Void> createToBankTransfer(APIRequest<ToBankTransferCreationSpec> request) throws IOException;
 }
