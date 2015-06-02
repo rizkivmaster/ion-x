@@ -1,7 +1,5 @@
 package org.ion.client.api.v1;
 
-import org.ion.client.services.P2PTransactionSessionStatus;
-
 /**
  * // TODO Comment
  */

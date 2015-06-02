@@ -1,14 +1,14 @@
 package org.ion.client.services;
 
-import org.ion.client.domain.transaction.IONSavingAccount;
-import org.ion.client.domain.user.BankAccount;
+import org.ion.client.domain.finance.BankAccount;
+import org.ion.client.domain.finance.IONSavingsAccount;
 
 /**
  * // TODO Comment
  */
 public interface SavingsAccountService {
-  void moveMoneyInterSavingsAccount(IONSavingAccount srcIONSavingAccount,IONSavingAccount dstIONSavingsAccount, long amoun);
-  void moveMoneyFromInternalToBank(IONSavingAccount srcIONSavingsAccount, BankAccount dstBankAccount);
+  void moveMoneyInterSavingsAccount(IONSavingsAccount srcIONSavingsAccount,IONSavingsAccount dstIONSavingsAccount, long amoun);
+  void moveMoneyFromInternalToBank(IONSavingsAccount srcIONSavingsAccount, BankAccount dstBankAccount);
   BankAccount getBankAccountById(String id);
-  IONSavingAccount getDefaultIONSavingsAccountByUserId(String userId);
+  IONSavingsAccount getDefaultIONSavingsAccountByUserId(String userId);
 }

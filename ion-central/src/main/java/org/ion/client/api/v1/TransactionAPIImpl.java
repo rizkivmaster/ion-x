@@ -1,10 +1,18 @@
 package org.ion.client.api.v1;
 
 import org.ion.client.domain.TransactionAlias;
-import org.ion.client.domain.transaction.IONSavingAccount;
+import org.ion.client.domain.finance.BankAccount;
+import org.ion.client.domain.finance.IONSavingsAccount;
 import org.ion.client.domain.transaction.Transaction;
-import org.ion.client.domain.user.BankAccount;
+import org.ion.client.domain.transaction.TransactionProxy;
 import org.ion.client.services.*;
+import org.ion.client.services.util.P2PTopupSessionData;
+import org.ion.client.services.util.P2PTopupSessionSpec;
+import org.ion.client.services.util.P2PTransactionSessionData;
+import org.ion.client.services.util.P2PTransactionSessionSpec;
+import org.ion.client.services.util.P2PTransactionSessionStatus;
+import org.ion.client.services.util.TopupToken;
+import org.ion.client.domain.user.User;
 import org.ionexchange.v1.objects.*;
 
 import java.io.IOException;
@@ -80,7 +88,7 @@ public class TransactionAPIImpl extends IONAPIBase implements TransactionAPI {
         assert request != null;
         assert request.getData() != null;
 
-        BankAccount bankAccount = _transactionService.getBankAccountById(request.getData().getSavingAccountId());
+        IONSavingsAccount bankAccount = _transactionService.getBankAccountById(request.getData().getSavingAccountId());
         if (bankAccount != null) {
             P2PTopupSessionSpec p2PTopupSessionSpec = new P2PTopupSessionSpec();
             p2PTopupSessionSpec.setBankAccountTarget(bankAccount);
@@ -103,11 +111,11 @@ public class TransactionAPIImpl extends IONAPIBase implements TransactionAPI {
             if (srcTransactionProxy != null) {
                 TransactionProxy dstTransactionProxy = _transactionService.getP2PPartnerInGroupByTransactionId(request.getData().getTransactionProxyId());
                 if (dstTransactionProxy != null) {
-                    IONSavingAccount srcSavingAccount = _financialTransactionService.getDefaultSavingAccountByTransactionProxy(srcTransactionProxy);
+                    IONSavingsAccount srcSavingAccount = _financialTransactionService.getDefaultSavingAccountByTransactionProxy(srcTransactionProxy);
                     if (srcSavingAccount != null) {
-                        IONSavingAccount dstSavingAccount = _financialTransactionService.getDefaultSavingAccountByTransactionProxy(dstTransactionProxy);
+                        IONSavingsAccount dstSavingAccount = _financialTransactionService.getDefaultSavingAccountByTransactionProxy(dstTransactionProxy);
                         if (dstSavingAccount != null) {
-                            if (srcSavingAccount.getAmount() >= request.getData().getAmount()) {
+                            if (srcSavingAccount.getBalance() >= request.getData().getAmount()) {
                                 _savingsAccountService.moveMoneyInterSavingsAccount(srcSavingAccount, dstSavingAccount, request.getData().getAmount());
                                 return okResponse();
                             } else {
@@ -179,10 +187,10 @@ public class TransactionAPIImpl extends IONAPIBase implements TransactionAPI {
             if (user != null) {
                 BankAccount dstBankAccount = _savingsAccountService.getBankAccountById(request.getData().getUserId());
                 if (dstBankAccount != null) {
-                    IONSavingAccount srcIONSavingAccount = _savingsAccountService.getDefaultIONSavingsAccountByUserId(request.getData().getUserId());
-                    if (srcIONSavingAccount != null) {
-                        if (srcIONSavingAccount.getAmount() > request.getData().getAmount()) {
-                            _savingsAccountService.moveMoneyFromInternalToBank(srcIONSavingAccount, dstBankAccount);
+                    IONSavingsAccount srcIONSavingsAccount = _savingsAccountService.getDefaultIONSavingsAccountByUserId(request.getData().getUserId());
+                    if (srcIONSavingsAccount != null) {
+                        if (srcIONSavingsAccount.getBalance() > request.getData().getAmount()) {
+                            _savingsAccountService.moveMoneyFromInternalToBank(srcIONSavingsAccount, dstBankAccount);
                             return okResponse();
                         } else {
                             return failedResponse("The saving amount is not sufficient for bank transfer");

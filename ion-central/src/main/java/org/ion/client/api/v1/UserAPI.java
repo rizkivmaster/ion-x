@@ -1,6 +1,6 @@
 package org.ion.client.api.v1;
 
-import org.ion.client.services.UserDetail;
+import org.ion.client.services.util.UserDetail;
 import org.ionexchange.v1.objects.*;
 import org.springframework.stereotype.Controller;
 

@@ -1,6 +1,6 @@
 package org.ion.client.api.v1;
 
-import org.ion.client.services.TopupToken;
+import org.ion.client.services.util.TopupToken;
 import org.ionexchange.v1.objects.*;
 
 import java.io.IOException;

@@ -2,7 +2,13 @@ package org.ion.client.api.v1;
 
 import org.ion.client.domain.enumeration.SexType;
 import org.ion.client.services.*;
+import org.ion.client.domain.user.User;
 import org.ion.client.services.util.UserCreationSpec;
+import org.ion.client.services.util.UserDetail;
+import org.ion.client.services.util.UserLogoutConfirmationSpec;
+import org.ion.client.services.util.UserRegistrationSessionData;
+import org.ion.client.services.util.UserRegistrationSessionStatus;
+import org.ion.client.services.util.UserSession;
 import org.ionexchange.v1.objects.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +23,7 @@ public class UserAPIImpl extends IONAPIBase implements UserAPI  {
   private UserDataService _userDataService;
   private ApplicationSessionService _applicationSessionService;
   private AuthorizationService _authorizationService;
+  private TokenizationService _tokenizationService;
 
   public UserAPIImpl(UserDataService userDataService) {
     _userDataService = userDataService;
@@ -30,12 +37,16 @@ public class UserAPIImpl extends IONAPIBase implements UserAPI  {
     assert apiRequest!=null;
     assert apiRequest.getData()!=null;
 
-    User user = _userDataService.getUserByUsername(apiRequest.getData().getUsername());
+    UserSession user = _userDataService.getUserByUsername(apiRequest.getData().getUsername());
     if(user!=null){
       boolean hasLoginAuthority = _authorizationService.hasLoginAuthority(user,apiRequest.getData().getPassword());
       if(hasLoginAuthority)
       {
-        UserSession userSession = _applicationSessionService.createUserSession(user);
+        UserSession userSession = new UserSession();
+        String sessionId = _tokenizationService.generateNewSessionId();
+        userSession.setUserId(user.getUserId());
+        userSession.setUserSessionId(sessionId);
+        _applicationSessionService.setUserSession(userSession);
         return okResponse(userSession.getUserSessionId());
       }
       else
@@ -56,10 +67,12 @@ public class UserAPIImpl extends IONAPIBase implements UserAPI  {
     assert apiRequest!=null;
     assert apiRequest.getData()!=null;
 
-    UserRegistrationSessionSpec userRegistrationSessionSpec = new UserRegistrationSessionSpec();
-    userRegistrationSessionSpec.setSessionId(userRegistrationSessionSpec.getSessionId());
-    userRegistrationSessionSpec.setUserRegistrationData(apiRequest.getData());
-    _applicationSessionService.createUserRegistrationSession(userRegistrationSessionSpec);
+    UserRegistrationSessionData userRegistrationSessionData = new UserRegistrationSessionData();
+    String registrationToken = _tokenizationService.generateNewRegistrationToken();
+    userRegistrationSessionData.setToken(registrationToken);
+    userRegistrationSessionData.setUserRegistrationData(apiRequest.getData());
+    userRegistrationSessionData.setUserRegistrationSessionStatus(UserRegistrationSessionStatus.ACTIVE);
+    _applicationSessionService.setUserRegistrationSession(userRegistrationSessionData);
     return okResponse();
   }
 
@@ -69,9 +82,9 @@ public class UserAPIImpl extends IONAPIBase implements UserAPI  {
     assert apiRequest.getData()!=null;
 
 
-    String sessionId = apiRequest.getData().getSessionId();
-    UserRegistrationSessionData userRegistrationSessionData = _applicationSessionService.getUserRegistrationSession(sessionId);
-    if(userRegistrationSessionData.getUserRegistrationSessionStatus()==UserRegistrationSessionStatus.ACTIVE) {
+    String token = apiRequest.getData().getSubmittedToken();
+    UserRegistrationSessionData userRegistrationSessionData = _applicationSessionService.getUserRegistrationSession(token);
+    if(userRegistrationSessionData.getUserRegistrationSessionStatus()== UserRegistrationSessionStatus.ACTIVE) {
       if (apiRequest.getData().getSubmittedToken().equals(userRegistrationSessionData.getToken())) {
         UserRegistrationData userRegistrationData = userRegistrationSessionData.getUserRegistrationData();
         UserCreationSpec userCreationSpec = new UserCreationSpec();
@@ -102,7 +115,7 @@ public class UserAPIImpl extends IONAPIBase implements UserAPI  {
     else if(userRegistrationSessionData.getUserRegistrationSessionStatus()==UserRegistrationSessionStatus.COMPLETED){
       return failedResponse("The registration has been confirmed");
     }
-    else if(userRegistrationSessionData.getUserRegistrationSessionStatus()==UserRegistrationSessionStatus.DEAD){
+    else if(userRegistrationSessionData.getUserRegistrationSessionStatus()==UserRegistrationSessionStatus.NA){
       return failedResponse("The registration has been expired or not available");
     }
     else

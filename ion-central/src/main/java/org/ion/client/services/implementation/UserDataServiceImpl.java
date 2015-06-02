@@ -1,60 +1,59 @@
 package org.ion.client.services.implementation;
 
-import org.ion.client.accessors.AccountDataAccessor;
+import org.ion.client.domain.user.User;
+import org.ion.client.repository.UserDataRepository;
+import org.ion.client.services.EntityIdGeneratorService;
 import org.ion.client.services.UserDataService;
-import org.ion.client.services.util.CustomerReadDetailResult;
-import org.ion.client.services.util.CustomerReadDetailSpec;
 import org.ion.client.services.util.UserCreationSpec;
 import org.ion.client.services.util.UserDeletionSpec;
-import org.ion.client.services.util.UserRegistrationConfirmationResult;
-import org.ion.client.services.util.UserRegistrationConfirmationSpec;
-import org.ion.client.services.util.UserRegistrationCreationResult;
-import org.ion.client.services.util.UserRegistrationDeletionResult;
+import org.ion.client.services.util.UserSession;
 
 /**
  * Created by rizkivmaster on 4/24/15.
  */
 public class UserDataServiceImpl implements UserDataService {
-  private final AccountDataAccessor _customerDataAccessor;
+  private UserDataRepository _userDataRepository;
+  private EntityIdGeneratorService _entityIdGeneratorService;
 
-  public UserDataServiceImpl(AccountDataAccessor customerDataAccessor) {
-    _customerDataAccessor = customerDataAccessor;
+  public UserDataServiceImpl(
+      UserDataRepository userDataRepository,
+      EntityIdGeneratorService entityIdGeneratorService
+      )
+  {
+    _userDataRepository = userDataRepository;
+    _entityIdGeneratorService = entityIdGeneratorService;
   }
 
- //TODO implement password hashing
-  @Override
-  public UserRegistrationCreationResult createUserRegistration(UserCreationSpec userCreationSpec) {
-//    _customerDataAccessor.insertNewCustomer(
-//        registrationCreationSpec.getUsername(),
-//        registrationCreationSpec.getPassword(),
-//        registrationCreationSpec.getFirstName(),
-//        registrationCreationSpec.getLastName(),
-//        registrationCreationSpec.getEmail(),
-//        true,
-//        registrationCreationSpec.getGender() == SexType.MALE ? "male" : "female",
-//        registrationCreationSpec.getPhoneNumber(),
-//        new DateTime(),
-//        0L,
-//        registrationCreationSpec.getAddress()
-//    );
-    return null;
-  }
 
   @Override
-  public UserRegistrationDeletionResult deleteUserRegistration(UserDeletionSpec userDeletionSpec) {
+  public void createNewUser(UserCreationSpec userCreationSpec) throws Exception{
+    assert userCreationSpec!=null;
 
-    return null;
+    User newUser = new User();
+    String newUserId = _entityIdGeneratorService.generateNewID();
+    newUser.setId(newUserId);
+    newUser.setEmail(userCreationSpec.getEmail());
+    newUser.setFirstname(userCreationSpec.getFirstName());
+    newUser.setLastname(userCreationSpec.getLastName());
+    newUser.setGender(userCreationSpec.getGender());
+    _userDataRepository.upsertUser(newUser);
   }
 
   @Override
-  public UserRegistrationConfirmationResult confirmUserRegistration(UserRegistrationConfirmationSpec userRegistrationConfirmationSpec) {
-    return null;
+  public void deleteUser(UserDeletionSpec userDeletionSpec) {
+    // TODO impl
   }
 
   @Override
-  public CustomerReadDetailResult readCustomerDetail(CustomerReadDetailSpec customerReadDetailSpec) {
-//    Customer customer = _customerDataAccessor.readCustomerByUsername(customerReadDetailSpec.getUsername());
-//    return new CustomerReadDetailResult(customer);
-    return null;
+  public UserSession getUserByUsername(String username) throws Exception {
+    assert username!=null;
+    return _userDataRepository.getUserByUsername(username);
+  }
+
+  @Override
+  public User getUserById(String userId) throws Exception {
+    assert userId!=null;
+
+    return _userDataRepository.getUserById(userId);
   }
 }

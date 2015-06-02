@@ -1,5 +1,13 @@
 package org.ion.client.services;
 
+import org.ion.client.services.util.P2PTopupSessionData;
+import org.ion.client.services.util.P2PTopupSessionSpec;
+import org.ion.client.services.util.P2PTransactionSessionData;
+import org.ion.client.services.util.P2PTransactionSessionSpec;
+import org.ion.client.services.util.UserLogoutConfirmationSpec;
+import org.ion.client.services.util.UserRegistrationSessionData;
+import org.ion.client.services.util.UserSession;
+
 import java.io.IOException;
 
 /**
@@ -8,11 +16,11 @@ import java.io.IOException;
 //TODO formalize token: is an object that attached to a message to ensure the authenticity of the information
 public interface ApplicationSessionService {
 
-  void createUserRegistrationSession(UserRegistrationSessionSpec userRegistrationSessionSpec) throws IOException;
+  void setUserRegistrationSession(UserRegistrationSessionData userRegistrationSessionData) throws IOException;
 
   UserRegistrationSessionData getUserRegistrationSession(String sessionId) throws IOException;
 
-  UserSession createUserSession(User user) throws IOException;
+  void setUserSession(UserSession userSession) throws IOException;
 
   void confirmUserLogout(UserLogoutConfirmationSpec userLogoutConfirmationSpec) throws IOException;
 

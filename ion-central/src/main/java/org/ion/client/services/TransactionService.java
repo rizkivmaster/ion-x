@@ -1,10 +1,11 @@
 package org.ion.client.services;
 
-import org.ion.client.api.v1.TransactionProxy;
+import org.ion.client.domain.transaction.TransactionProxy;
 import org.ion.client.domain.TransactionAlias;
-import org.ion.client.domain.transaction.IONSavingAccount;
+import org.ion.client.domain.finance.IONSavingsAccount;
 import org.ion.client.domain.transaction.Transaction;
-import org.ion.client.domain.user.BankAccount;
+import org.ion.client.domain.transaction.P2PTransactionGroup;
+import org.ion.client.domain.user.User;
 
 import java.io.IOException;
 import java.util.List;
@@ -24,15 +25,15 @@ public interface TransactionService {
 
   void createP2PTransaction(TransactionAlias creatorAlias, TransactionAlias attendantAlias) throws IOException;
 
-  BankAccount getBankAccountById(String id);
+  IONSavingsAccount getBankAccountById(String id);
 
-  void reloadBalance(BankAccount srcBankAccount, IONSavingAccount dstIONSavingAccount,long amount) throws Exception;
+  void reloadBalance(IONSavingsAccount srcBankAccount, IONSavingsAccount dstIONSavingsAccount,long amount) throws Exception;
 
-  void unloadBalance(IONSavingAccount srcIONSavingAccount, BankAccount dstBankAccount, long amount) throws  Exception;
+  void unloadBalance(IONSavingsAccount srcIONSavingsAccount, IONSavingsAccount dstBankAccount, long amount) throws  Exception;
 
 
 
-  IONSavingAccount getDefaultIONSavingAccount(User user);
+  IONSavingsAccount getDefaultIONSavingAccount(User user);
 
   TransactionProxy getTransactionProxybyId(String id);
 

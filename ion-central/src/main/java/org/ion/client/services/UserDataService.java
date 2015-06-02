@@ -1,9 +1,9 @@
 package org.ion.client.services;
 
-import org.ion.client.services.util.CustomerReadDetailResult;
-import org.ion.client.services.util.CustomerReadDetailSpec;
+import org.ion.client.domain.user.User;
 import org.ion.client.services.util.UserCreationSpec;
 import org.ion.client.services.util.UserDeletionSpec;
+import org.ion.client.services.util.UserSession;
 
 /**
  * Created by rizkivmaster on 4/23/15.
@@ -11,10 +11,10 @@ import org.ion.client.services.util.UserDeletionSpec;
 public interface UserDataService {
 
 
-  void createNewUser(UserCreationSpec userCreationSpec);
-  void deleteUser(UserDeletionSpec userDeletionSpec);
-  User getUserByUsername(String username);
-  User getUserById(String userId);
+  void createNewUser(UserCreationSpec userCreationSpec) throws Exception;
+  void deleteUser(UserDeletionSpec userDeletionSpec) throws Exception;
+  UserSession getUserByUsername(String username) throws Exception;
+  User getUserById(String userId) throws Exception;
 
 
   /*
@@ -32,5 +32,5 @@ public interface UserDataService {
 
   public CustomerSearchResult searchCustomers(CustomerSearchSpec customerSearchSpec);
   */
-  public CustomerReadDetailResult readCustomerDetail(CustomerReadDetailSpec customerReadDetailSpec);
+//  public CustomerReadDetailResult readCustomerDetail(CustomerReadDetailSpec customerReadDetailSpec);
 }

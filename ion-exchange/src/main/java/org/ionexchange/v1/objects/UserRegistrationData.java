@@ -14,16 +14,6 @@ public class UserRegistrationData {
   private String _phoneNumber;
   private String _address;
 
-  public String getSessionId() {
-    return _sessionId;
-  }
-
-  public void setSessionId(String sessionId) {
-    _sessionId = sessionId;
-  }
-
-  private String _sessionId;
-
   public UserRegistrationData() {
   }
 
