@@ -1,11 +1,11 @@
 package org.ion.client;
 
-import org.ion.client.accessors.AccountDataAccessor;
-import org.ion.client.accessors.AccountSavingAccessor;
-import org.ion.client.accessors.implementation.AccountDataAccessorMockImpl;
-import org.ion.client.accessors.implementation.AccountSavingAccessorImpl;
-import org.ion.client.accessors.AuthorizationDataAccessor;
-import org.ion.client.accessors.implementation.AuthorizationDataAccessorImpl;
+import org.ion.client.repository.UserDataRepository;
+import org.ion.client.repository.AccountSavingAccessor;
+import org.ion.client.repository.implementation.UserDataRepositoryMockImpl;
+import org.ion.client.repository.implementation.AccountSavingAccessorImpl;
+import org.ion.client.repository.AuthorizationDataAccessor;
+import org.ion.client.repository.implementation.AuthorizationDataAccessorImpl;
 import org.ion.client.api.v1.UserAPI;
 import org.ion.client.api.v1.UserAPIImpl;
 import org.ion.client.services.UserDataService;
@@ -19,7 +19,7 @@ public class IONComponent implements Startable{
   /*
    * Contains all Data Access Object
    */
-  private final AccountDataAccessor _customerDataAccessorImpl;
+  private final UserDataRepository _customerDataAccessorImpl;
   private final AuthorizationDataAccessor _authorizationDataAccessor;
   private final AccountSavingAccessor _accountSavingAccessor;
 
@@ -41,7 +41,7 @@ public class IONComponent implements Startable{
 
 
   public IONComponent() {
-    _customerDataAccessorImpl = new AccountDataAccessorMockImpl();
+    _customerDataAccessorImpl = new UserDataRepositoryMockImpl();
     _authorizationDataAccessor = new AuthorizationDataAccessorImpl();
     _accountSavingAccessor = new AccountSavingAccessorImpl();
 

@@ -1,5 +1,6 @@
 package org.ion.client.api.v1;
 
+import org.ion.client.services.util.UserDetail;
 import org.ionexchange.v1.objects.*;
 import org.springframework.stereotype.Controller;
 
@@ -18,10 +19,7 @@ public interface UserAPI {
 
   APIResponse<Void> confirmUserLogout(APIRequest<UserLogoutData> apiRequest) throws IOException;
 
-  APIResponse<Void> retrieveUserDetail(APIRequest<UserDetailRequest> apiRequest) throws IOException;
+  APIResponse<UserDetail> retrieveUserDetail(APIRequest<UserDetailRequest> apiRequest) throws IOException;
 
-  APIResponse<Void> addUserContact(APIRequest<AddUserContactData> apiRequest) throws IOException;
-
-  APIResponse<Void> confirmUserContactInvitation(APIRequest<UserContactConfirmationData> apiRequest) throws IOException;
 }
 

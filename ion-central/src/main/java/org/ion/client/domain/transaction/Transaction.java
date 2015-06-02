@@ -4,11 +4,22 @@ package org.ion.client.domain.transaction;
  * Created by rizkivmaster on 4/23/15.
  */
 public abstract class Transaction {
-  private final String _id;
-  private final long _amount;
+  private String _id;
+  private String _transactionProxyId;
 
-  public Transaction(String id, long amount) {
+  public String getId() {
+    return _id;
+  }
+
+  public void setId(String id) {
     _id = id;
-    _amount = amount;
+  }
+
+  public String getTransactionProxyId() {
+    return _transactionProxyId;
+  }
+
+  public void setTransactionProxyId(String transactionProxyId) {
+    _transactionProxyId = transactionProxyId;
   }
 }

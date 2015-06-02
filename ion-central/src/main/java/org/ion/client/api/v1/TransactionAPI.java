@@ -1,26 +1,26 @@
 package org.ion.client.api.v1;
 
-import org.ionexchange.v1.router.Routers;
+import org.ion.client.services.util.TopupToken;
 import org.ionexchange.v1.objects.*;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.io.IOException;
 
 /**
  * // TODO Comment
  */
 public interface TransactionAPI {
 
-  RequestTopupTokenRequest requestTopupToken(RequestTopupTokenSpec requestTopupTokenSpec);
+  APIResponse<Void> openP2PTransaction(APIRequest<OpenP2PTransactionSpec> request) throws IOException;
 
-  CreateP2PMoneyTransfer createP2PMoneyTransfer(CreateP2PMoneyTransferSpec createP2PMoneyTransferSpec);
+  APIResponse<Void> acceptP2PTransaction(APIRequest<ApproveP2PTransactionSpec> request) throws IOException;
 
-  GetIncomingMoneyTransactionResult getIncomingMoneyTransactionResult(GetIncomingMoneyTransactionSpec getIncomingMoneyTransactionSpec);
+  APIResponse<TopupToken> requestTopupToken(APIRequest<RequestTopupTokenSpec> request) throws IOException;
 
-  CreateTextTransferResult createTextTransfer(CreateTextTransferSpec createTextTransferSpec);
+  APIResponse<Void> createP2PMoneyTransfer(APIRequest<CreateP2PMoneyTransferSpec> request) throws IOException;
 
-  GetIncomingMessagesResult getIncomingMessages(GetIncomingMessagesSpec getIncomingMessagesSpec);
+  APIResponse<IncomingTransactionData> getIncomingTransactions(APIRequest<GetIncomingTransactionsSpec> request) throws IOException;
 
-  ToBankTransferCreationResult createToBankTransfer(ToBankTransferCreationSpec toBankTransferCreationSpec);
+  APIResponse<Void> createTextTransfer(APIRequest<CreateTextTransferSpec> request) throws IOException;
+
+  APIResponse<Void> createToBankTransfer(APIRequest<ToBankTransferCreationSpec> request) throws IOException;
 }

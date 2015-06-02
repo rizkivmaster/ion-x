@@ -1,15 +1,14 @@
 package org.ion.client.services;
 
-import org.ion.client.domain.transaction.SavingAccount;
-import org.ion.client.domain.user.Account;
-import org.ion.client.domain.user.BankAccount;
-import org.ion.client.services.util.TopUpCancellationResult;
-import org.ion.client.services.util.TopUpCancellationSpec;
-import org.ion.client.services.util.TopUpConfirmationSpec;
-import org.ion.client.services.util.TopUpConfirmationResult;
-import org.ion.client.services.util.TopUpTokenCreationResult;
-import org.ion.client.services.util.TopUpTokenCreationSpec;
-import org.ionexchange.v1.objects.RequestTopupTokenRequest;
+import org.ion.client.domain.transaction.TransactionProxy;
+import org.ion.client.domain.TransactionAlias;
+import org.ion.client.domain.finance.IONSavingsAccount;
+import org.ion.client.domain.transaction.Transaction;
+import org.ion.client.domain.transaction.P2PTransactionGroup;
+import org.ion.client.domain.user.User;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by rizkivmaster on 4/23/15.
@@ -20,11 +19,31 @@ public interface TransactionService {
    * TopUp related service
    */
 
-  public void reloadBalance(BankAccount srcBankAccount, SavingAccount dstSavingAccount,long amount) throws Exception;
+  TransactionAlias getTransactionAliasbyUsername(String username) throws IOException;
 
-  public void unloadBalance(SavingAccount srcSavingAccount, BankAccount dstBankAccount, long amount) throws  Exception;
+  TransactionAlias getTransactionAliasbyId(String id);
 
-  public void transferP2P(SavingAccount srcSavingAccount, SavingAccount dstSavingAccount, long amount) throws  Exception;
+  void createP2PTransaction(TransactionAlias creatorAlias, TransactionAlias attendantAlias) throws IOException;
+
+  IONSavingsAccount getBankAccountById(String id);
+
+  void reloadBalance(IONSavingsAccount srcBankAccount, IONSavingsAccount dstIONSavingsAccount,long amount) throws Exception;
+
+  void unloadBalance(IONSavingsAccount srcIONSavingsAccount, IONSavingsAccount dstBankAccount, long amount) throws  Exception;
+
+
+
+  IONSavingsAccount getDefaultIONSavingAccount(User user);
+
+  TransactionProxy getTransactionProxybyId(String id);
+
+  TransactionProxy getP2PPartnerInGroupByTransactionId(String id);
+
+  P2PTransactionGroup getP2PTransactionGroupById(String id);
+
+  void createP2PTextTransaction(TransactionProxy transactionProxy, String text);
+
+  List<Transaction> getUnreadTransactions(TransactionAlias transactionAlias, int size, int skip);
 
 
 //  public TopUpConfirmationResult confirmTopUp(TopUpConfirmationSpec topUpConfirmationRequestSpec);

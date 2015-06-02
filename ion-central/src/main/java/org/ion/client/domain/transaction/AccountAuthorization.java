@@ -1,6 +1,6 @@
 package org.ion.client.domain.transaction;
 
-import org.ion.client.domain.user.Authorizable;
+import org.ion.client.domain.security.Authorizable;
 
 /**
  * // TODO Comment

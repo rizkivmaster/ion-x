@@ -5,7 +5,7 @@ import org.ionexchange.v1.SexType;
 /**
  * // TODO Comment
  */
-public class UserRegistrationData extends APIRequest {
+public class UserRegistrationData {
   private String _username;
   private String _firstName;
   private String _lastName;

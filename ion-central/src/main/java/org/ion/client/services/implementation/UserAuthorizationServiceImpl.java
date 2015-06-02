@@ -1,12 +1,10 @@
 package org.ion.client.services.implementation;
 
-import org.ion.client.accessors.AuthorizationDataAccessor;
+import org.ion.client.repository.AuthorizationDataAccessor;
 import org.ion.client.domain.user.Account;
-import org.ion.client.domain.user.Authority;
-import org.ion.client.domain.user.AuthorityPass;
-import org.ion.client.domain.user.Authorizable;
+import org.ion.client.domain.security.Authority;
+import org.ion.client.domain.security.AuthorityPass;
 import org.ion.client.services.AuthorizationService;
-import org.ion.client.services.util.LoginCreationSpec;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
