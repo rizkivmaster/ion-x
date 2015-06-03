@@ -5,7 +5,8 @@ package org.ionexchange.v1.objects;
  */
 public class ToBankTransferCreationSpec {
   private String _userId;
-  private String _savingsAccountId;
+  private String _savingAccountId;
+  private String _bankAccountId;
   private long _amount;
 
   public ToBankTransferCreationSpec() {
@@ -19,12 +20,12 @@ public class ToBankTransferCreationSpec {
     _userId = userId;
   }
 
-  public String getSavingsAccountId() {
-    return _savingsAccountId;
+  public String getSavingAccountId() {
+    return _savingAccountId;
   }
 
-  public void setSavingsAccountId(String savingsAccountId) {
-    _savingsAccountId = savingsAccountId;
+  public void setSavingAccountId(String savingAccountId) {
+    _savingAccountId = savingAccountId;
   }
 
   public long getAmount() {
@@ -33,5 +34,13 @@ public class ToBankTransferCreationSpec {
 
   public void setAmount(long amount) {
     _amount = amount;
+  }
+
+  public String getBankAccountId() {
+    return _bankAccountId;
+  }
+
+  public void setBankAccountId(String bankAccountId) {
+    _bankAccountId = bankAccountId;
   }
 }

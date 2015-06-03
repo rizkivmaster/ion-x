@@ -1,6 +1,7 @@
 package org.ion.client.services;
 
 import org.ion.client.IONComponent;
+import org.ion.client.repository.UserDataRepository;
 import org.springframework.boot.test.IntegrationTest;
 
 import java.util.Random;
@@ -18,7 +19,7 @@ public abstract class IONIntegrationTestBase {
     _ionComponent = new IONComponent();
   }
 
-  public UserDataService getUserDataService(){
+  public UserDataRepository getUserDataService(){
     return _ionComponent.getUserDataService();
   }
 //  public TransactionService getTransactionService(){ return _ionComponent.getTransactionService();}

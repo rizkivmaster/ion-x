@@ -1,12 +1,9 @@
-package org.ion.client.services.implementation;
+package org.ion.client.repository.implementation;
 
 import org.ion.client.repository.SessionRepository;
-import org.ion.client.services.ApplicationSessionService;
+import org.ion.client.repository.ApplicationSessionRepository;
 import org.ion.client.services.util.P2PTopupSessionData;
-import org.ion.client.services.util.P2PTopupSessionSpec;
 import org.ion.client.services.util.P2PTransactionSessionData;
-import org.ion.client.services.util.P2PTransactionSessionSpec;
-import org.ion.client.services.util.UserLogoutConfirmationSpec;
 import org.ion.client.services.util.UserRegistrationSessionData;
 import org.ion.client.services.util.UserRegistrationSessionStatus;
 import org.ion.client.services.util.UserSession;
@@ -16,12 +13,14 @@ import java.io.IOException;
 /**
  * // TODO Comment
  */
-public class ApplicationSessionServiceImpl implements ApplicationSessionService {
+public class ApplicationSessionRepositoryImpl implements ApplicationSessionRepository {
   private SessionRepository _sessionRepository;
 
 
   private static final int REGISTRATION_TTL = 3600;
   private static final int USER_SESSION_TTL = 3600;
+  private static final int P2P_TRANSACTION_TTL = 3600;
+  private static final int P2P_TOPUP_TTL = 3600;
 
 
   @Override
@@ -66,29 +65,43 @@ public class ApplicationSessionServiceImpl implements ApplicationSessionService 
   }
 
   @Override
-  public void confirmUserLogout(UserLogoutConfirmationSpec userLogoutConfirmationSpec) throws IOException {
-    // TODO impl
+  public void confirmUserLogout(String sessionId) throws IOException {
+    assert sessionId!=null && sessionId.isEmpty();
+
+    _sessionRepository.delete(sessionId);
   }
 
   @Override
-  public void createP2PTransactionSession(P2PTransactionSessionSpec spec) throws IOException {
-    // TODO impl
+  public void setP2PTransactionSession(P2PTransactionSessionData p2PTransactionSessionData) throws IOException {
+    assert p2PTransactionSessionData!=null;
+    assert p2PTransactionSessionData.getSessionId()!=null;
+
+    _sessionRepository.set(p2PTransactionSessionData.getSessionId(),P2P_TRANSACTION_TTL,p2PTransactionSessionData);
   }
 
   @Override
   public P2PTransactionSessionData getP2PTransactionSession(String sessionId) throws IOException {
-    return null;  // TODO impl
+    assert sessionId!=null;
+
+    P2PTransactionSessionData p2PTransactionSessionData = (P2PTransactionSessionData)_sessionRepository.get(sessionId);
+    return p2PTransactionSessionData;
+  }
+
+
+  @Override
+  public void setTopupSession(P2PTopupSessionData p2PTopupSessionData) throws IOException {
+    assert p2PTopupSessionData!=null;
+    assert p2PTopupSessionData.getSessionId()!=null;
+
+    _sessionRepository.set(p2PTopupSessionData.getSessionId(), P2P_TOPUP_TTL,p2PTopupSessionData);
   }
 
   @Override
-  public P2PTopupSessionData createTopupSession(P2PTopupSessionSpec spec) throws IOException {
-    return null;  // TODO impl
-  }
+  public P2PTopupSessionData getTopupSession(String sessionId) throws IOException{
+    assert sessionId!=null;
 
-  @Override
-  public P2PTopupSessionData getTopupSession(String sessionId) {
-    return null;  // TODO impl
+    P2PTopupSessionData p2PTopupSessionData = (P2PTopupSessionData) _sessionRepository.get(sessionId);
+    return p2PTopupSessionData;
   }
-
 
 }

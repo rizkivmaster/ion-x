@@ -1,4 +1,4 @@
-package org.ion.client.api.v1;
+package org.ionexchange.v1.objects;
 
 /**
  * // TODO Comment

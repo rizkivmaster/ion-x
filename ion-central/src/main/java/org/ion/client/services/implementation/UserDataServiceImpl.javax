@@ -2,7 +2,7 @@ package org.ion.client.services.implementation;
 
 import org.ion.client.domain.user.User;
 import org.ion.client.repository.UserDataRepository;
-import org.ion.client.services.EntityIdGeneratorService;
+import org.ion.util.EntityIdGenerator;
 import org.ion.client.services.UserDataService;
 import org.ion.client.services.util.UserCreationSpec;
 import org.ion.client.services.util.UserDeletionSpec;
@@ -13,15 +13,15 @@ import org.ion.client.services.util.UserSession;
  */
 public class UserDataServiceImpl implements UserDataService {
   private UserDataRepository _userDataRepository;
-  private EntityIdGeneratorService _entityIdGeneratorService;
+  private EntityIdGenerator _entityIdGenerator;
 
   public UserDataServiceImpl(
       UserDataRepository userDataRepository,
-      EntityIdGeneratorService entityIdGeneratorService
+      EntityIdGenerator entityIdGenerator
       )
   {
     _userDataRepository = userDataRepository;
-    _entityIdGeneratorService = entityIdGeneratorService;
+    _entityIdGenerator = entityIdGenerator;
   }
 
 
@@ -30,7 +30,7 @@ public class UserDataServiceImpl implements UserDataService {
     assert userCreationSpec!=null;
 
     User newUser = new User();
-    String newUserId = _entityIdGeneratorService.generateNewID();
+    String newUserId = _entityIdGenerator.generateNewID();
     newUser.setId(newUserId);
     newUser.setEmail(userCreationSpec.getEmail());
     newUser.setFirstname(userCreationSpec.getFirstName());
@@ -45,7 +45,7 @@ public class UserDataServiceImpl implements UserDataService {
   }
 
   @Override
-  public UserSession getUserByUsername(String username) throws Exception {
+  public User getUserByUsername(String username) throws Exception {
     assert username!=null;
     return _userDataRepository.getUserByUsername(username);
   }

@@ -7,8 +7,6 @@ import org.ion.client.domain.finance.IONSavingsAccount;
  * // TODO Comment
  */
 public interface SavingsAccountService {
-  void moveMoneyInterSavingsAccount(IONSavingsAccount srcIONSavingsAccount,IONSavingsAccount dstIONSavingsAccount, long amoun);
-  void moveMoneyFromInternalToBank(IONSavingsAccount srcIONSavingsAccount, BankAccount dstBankAccount);
-  BankAccount getBankAccountById(String id);
-  IONSavingsAccount getDefaultIONSavingsAccountByUserId(String userId);
+  void moveMoneyInterSavingsAccount(IONSavingsAccount srcIONSavingsAccount,IONSavingsAccount dstIONSavingsAccount, long amoun) throws Exception;
+  void moveMoneyFromInternalToBank(IONSavingsAccount srcIONSavingsAccount, BankAccount dstBankAccount) throws Exception;
 }

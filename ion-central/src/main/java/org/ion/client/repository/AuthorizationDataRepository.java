@@ -7,9 +7,13 @@ import org.ion.client.domain.security.AuthorityPass;
 /**
  * // TODO Comment
  */
-public interface AuthorizationDataAccessor {
+public interface AuthorizationDataRepository {
+
   void upsertAuthority(Authority authority);
+
   void upsertAuthorityWithPass(Authority authority, AuthorityPass authorityPass);
+
   Authority getAuthority(Account account);
+
   AuthorityPass getAuthorityPass(Authority authority);
 }

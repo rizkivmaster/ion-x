@@ -11,15 +11,15 @@ import java.io.IOException;
  */
 @Controller
 public interface UserAPI {
-  APIResponse<String> userLogin(APIRequest<UserLoginData> apiRequest) throws IOException;
+  APIResponse<String> userLogin(APIRequest<UserLoginData> apiRequest) throws Exception;
 
-  APIResponse<Void> registerUser(APIRequest<UserRegistrationData> apiRequest) throws IOException;
+  APIResponse<Void> registerUser(APIRequest<UserRegistrationData> apiRequest) throws Exception;
 
-  APIResponse<Void> confirmUserRegistration(APIRequest<UserRegistrationConfirmationData> apiRequest) throws IOException;
+  APIResponse<Void> confirmUserRegistration(APIRequest<UserRegistrationConfirmationData> apiRequest) throws Exception;
 
-  APIResponse<Void> confirmUserLogout(APIRequest<UserLogoutData> apiRequest) throws IOException;
+  APIResponse<Void> confirmUserLogout(APIRequest<UserLogoutData> apiRequest) throws Exception;
 
-  APIResponse<UserDetail> retrieveUserDetail(APIRequest<UserDetailRequest> apiRequest) throws IOException;
+  APIResponse<UserDetail> retrieveUserDetail(APIRequest<UserDetailRequest> apiRequest) throws Exception;
 
 }
 

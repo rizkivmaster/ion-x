@@ -1,0 +1,113 @@
+package org.ion.client.repository.implementation;
+
+import org.ionexchange.v1.objects.TransactionView;
+import org.ion.client.domain.TransactionAlias;
+import org.ion.client.domain.finance.BankAccount;
+import org.ion.client.domain.transaction.TransactionProxy;
+import org.ion.client.repository.AccountSavingAccessor;
+import org.ion.client.repository.UserDataRepository;
+import org.ion.client.domain.finance.IONSavingsAccount;
+import org.ion.client.services.SavingsAccountTransactionService;
+import org.ion.client.repository.TransactionRepository;
+
+import java.io.IOException;
+import java.util.List;
+
+/**
+ * // TODO Comment
+ */
+public class TransactionRepositoryImpl implements TransactionRepository {
+  private final UserDataRepository _userDataRepository;
+  private final AccountSavingAccessor _accountSavingAccessor;
+  private final SavingsAccountTransactionService _savingsAccountTransactionService;
+  private final TransactionRepository _transactionRepository;
+
+  private final IONSavingsAccount _ionBankAccount;
+
+  public TransactionRepositoryImpl(UserDataRepository userDataRepository, AccountSavingAccessor accountSavingAccessor, SavingsAccountTransactionService savingsAccountTransactionService, IONSavingsAccount ionBankAccount) {
+    _userDataRepository = userDataRepository;
+    _accountSavingAccessor = accountSavingAccessor;
+    _savingsAccountTransactionService = savingsAccountTransactionService;
+    _ionBankAccount = ionBankAccount;
+  }
+
+  @Override
+  public TransactionAlias getTransactionAliasbyUsername(String username) throws IOException {
+    assert username!=null;
+
+    TransactionAlias transactionAlias = _transactionRepository.getTransactionAliasByUsername();
+  }
+
+  @Override
+  public TransactionAlias getTransactionAliasbyId(String id) {
+    return null;  // TODO impl
+  }
+
+  @Override
+  public void createP2PTransactionGroup(TransactionAlias creatorAlias, TransactionAlias attendantAlias) throws IOException {
+    // TODO impl
+  }
+
+  @Override
+  public BankAccount getBankAccountById(String id) {
+    return null;  // TODO impl
+  }
+
+  @Override
+  public TransactionProxy getTransactionProxybyId(String id) {
+    return null;  // TODO impl
+  }
+
+  @Override
+  public TransactionProxy getP2PPartnerInGroupByTransactionId(String id) {
+    return null;  // TODO impl
+  }
+
+  @Override
+  public void createP2PTextTransaction(TransactionProxy transactionProxy, String text) {
+    // TODO impl
+  }
+
+  @Override
+  public List<TransactionView> getUnreadTransactions(TransactionAlias transactionAlias, int size, int skip) {
+    return null;  // TODO impl
+  }
+
+
+//  @Override
+//  public void reloadBalance(IONSavingsAccount srcBankAccount, IONSavingsAccount dstIONSavingsAccount, long amount) throws Exception {
+//    assert amount > 0;
+//    assert srcBankAccount!=null;
+//    assert dstIONSavingsAccount !=null;
+//    //to where?
+//    _savingsAccountTransactionService.transferP2P(srcBankAccount,_ionBankAccount, amount);
+//    dstIONSavingsAccount.setBalance(dstIONSavingsAccount.getBalance() + amount);
+//    _accountSavingAccessor.upsertSavingAccount(dstIONSavingsAccount);
+//
+//  }
+//
+//  @Override
+//  public void transferP2P(IONSavingsAccount srcIONSavingsAccount, IONSavingsAccount dstIONSavingsAccount, long amount) throws Exception {
+//    assert amount>0;
+//    assert srcIONSavingsAccount !=null;
+//    assert dstIONSavingsAccount !=null;
+//    assert srcIONSavingsAccount.getBalance()>amount;
+//    dstIONSavingsAccount.setBalance(dstIONSavingsAccount.getBalance() - amount);
+//    srcIONSavingsAccount.setBalance(srcIONSavingsAccount.getBalance() - amount);
+//    _accountSavingAccessor.upsertSavingAccount(srcIONSavingsAccount);
+//    _accountSavingAccessor.upsertSavingAccount(dstIONSavingsAccount);
+//  }
+//
+//  @Override
+//  public void unloadBalance(IONSavingsAccount srcIONSavingsAccount, IONSavingsAccount dstBankAccount, long amount) throws Exception {
+//    assert amount>0;
+//    assert srcIONSavingsAccount !=null;
+//    assert dstBankAccount!=null;
+//    assert srcIONSavingsAccount.getBalance()>amount;
+//    //asumsi berhasil
+//    _savingsAccountTransactionService.transferP2P(_ionBankAccount,dstBankAccount,amount);
+//    srcIONSavingsAccount.setBalance(srcIONSavingsAccount.getBalance() - amount);
+//    _accountSavingAccessor.upsertSavingAccount(srcIONSavingsAccount);
+//  }
+
+}
