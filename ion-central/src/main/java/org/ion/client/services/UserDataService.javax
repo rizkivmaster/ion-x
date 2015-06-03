@@ -13,7 +13,7 @@ public interface UserDataService {
 
   void createNewUser(UserCreationSpec userCreationSpec) throws Exception;
   void deleteUser(UserDeletionSpec userDeletionSpec) throws Exception;
-  UserSession getUserByUsername(String username) throws Exception;
+  User getUserByUsername(String username) throws Exception;
   User getUserById(String userId) throws Exception;
 
 

@@ -4,20 +4,12 @@ package org.ion.client.services.util;
  * // TODO Comment
  */
 public class P2PTransactionSessionData {
-  private String _id;
   private String _creatorAliasId;
   private String _attendantAliasId;
   private P2PTransactionSessionStatus _status;
+  private String _sessionId;
 
   public P2PTransactionSessionData() {
-  }
-
-  public String getId() {
-    return _id;
-  }
-
-  public void setId(String id) {
-    _id = id;
   }
 
   public String getCreatorAliasId() {
@@ -42,5 +34,13 @@ public class P2PTransactionSessionData {
 
   public void setStatus(P2PTransactionSessionStatus status) {
     _status = status;
+  }
+
+  public String getSessionId() {
+    return _sessionId;
+  }
+
+  public void setSessionId(String sessionId) {
+    _sessionId = sessionId;
   }
 }

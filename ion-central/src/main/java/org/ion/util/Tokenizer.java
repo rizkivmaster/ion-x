@@ -1,9 +1,10 @@
-package org.ion.client.services;
+package org.ion.util;
 
 /**
  * // TODO Comment
  */
-public interface TokenizationService {
+public interface Tokenizer {
   String generateNewRegistrationToken();
+  String generateNewTopupToken();
   String generateNewSessionId();
 }

@@ -1,4 +1,4 @@
-package org.ion.client.api.v1;
+package org.ionexchange.v1.objects;
 
 /**
  * // TODO Comment
@@ -6,6 +6,7 @@ package org.ion.client.api.v1;
 public class OpenP2PTransactionSpec {
   private String _creatorUsername;
   private String _attendantUsername;
+  private String _sessionId;
 
   public OpenP2PTransactionSpec() {
   }
@@ -24,5 +25,13 @@ public class OpenP2PTransactionSpec {
 
   public void setAttendantUsername(String attendantUsername) {
     _attendantUsername = attendantUsername;
+  }
+
+  public String getSessionId() {
+    return _sessionId;
+  }
+
+  public void setSessionId(String sessionId) {
+    _sessionId = sessionId;
   }
 }

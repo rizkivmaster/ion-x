@@ -1,6 +1,6 @@
-package org.ion.client.repository.implementation;
+package org.ion.client.repository.implementation.postgre;
 
-import org.ion.client.repository.AuthorizationDataAccessor;
+import org.ion.client.repository.AuthorizationDataRepository;
 import org.ion.client.domain.user.Account;
 import org.ion.client.domain.security.Authority;
 import org.ion.client.domain.security.AuthorityPass;
@@ -8,7 +8,7 @@ import org.ion.client.domain.security.AuthorityPass;
 /**
  * // TODO Comment
  */
-public class AuthorizationDataAccessorImpl implements AuthorizationDataAccessor {
+public class PostgreAuthorizationDataRepositoryImpl implements AuthorizationDataRepository {
 
   @Override
   public void upsertAuthority(Authority authority) {

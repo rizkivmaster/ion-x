@@ -1,6 +1,6 @@
 package org.ion.client.services.implementation;
 
-import org.ion.client.repository.AuthorizationDataAccessor;
+import org.ion.client.repository.AuthorizationDataRepository;
 import org.ion.client.domain.user.Account;
 import org.ion.client.domain.security.Authority;
 import org.ion.client.domain.security.AuthorityPass;
@@ -13,10 +13,10 @@ import java.security.MessageDigest;
  * // TODO Comment
  */
 public class UserAuthorizationServiceImpl implements AuthorizationService {
-  private AuthorizationDataAccessor _authorizationDataAccessor;
+  private AuthorizationDataRepository _authorizationDataRepository;
 
-  public UserAuthorizationServiceImpl(AuthorizationDataAccessor authorizationDataAccessor) {
-    _authorizationDataAccessor = authorizationDataAccessor;
+  public UserAuthorizationServiceImpl(AuthorizationDataRepository authorizationDataRepository) {
+    _authorizationDataRepository = authorizationDataRepository;
   }
   @Override
   public void createLoginAuthority(Account account, String requestedPassword) {
@@ -24,7 +24,7 @@ public class UserAuthorizationServiceImpl implements AuthorizationService {
     try{
       String hashedKey = getHashedKey(requestedPassword);
       AuthorityPass authorityPass = AuthorityPass.createPassFromAuthority(authority,hashedKey);
-      _authorizationDataAccessor.upsertAuthorityWithPass(authority,authorityPass);
+      _authorizationDataRepository.upsertAuthorityWithPass(authority,authorityPass);
     }
     catch(Exception e){
      e.printStackTrace();
@@ -35,8 +35,8 @@ public class UserAuthorizationServiceImpl implements AuthorizationService {
   public boolean isValidToLogin(Account account, String password) {
     try{
       String hashedKey = getHashedKey(password);
-      Authority authority = _authorizationDataAccessor.getAuthority(account);
-      AuthorityPass pass = _authorizationDataAccessor.getAuthorityPass(authority);
+      Authority authority = _authorizationDataRepository.getAuthority(account);
+      AuthorityPass pass = _authorizationDataRepository.getAuthorityPass(authority);
       return hashedKey.equals(pass.getPassKey());
     }
     catch(Exception e){

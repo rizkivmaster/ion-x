@@ -2,12 +2,12 @@ package org.ion.client;
 
 import org.ion.client.repository.UserDataRepository;
 import org.ion.client.repository.AccountSavingAccessor;
+import org.ion.client.repository.implementation.postgre.PostgreAuthorizationDataRepositoryImpl;
 import org.ion.client.repository.implementation.UserDataRepositoryMockImpl;
 import org.ion.client.repository.implementation.AccountSavingAccessorImpl;
-import org.ion.client.repository.AuthorizationDataAccessor;
-import org.ion.client.repository.implementation.AuthorizationDataAccessorImpl;
+import org.ion.client.repository.AuthorizationDataRepository;
 import org.ion.client.api.v1.UserAPI;
-import org.ion.client.api.v1.UserAPIImpl;
+import org.ion.client.api.v1.implementation.UserAPIImpl;
 import org.ion.client.services.UserDataService;
 import org.ion.client.services.implementation.UserDataServiceImpl;
 import org.ion.util.Startable;
@@ -20,7 +20,7 @@ public class IONComponent implements Startable{
    * Contains all Data Access Object
    */
   private final UserDataRepository _customerDataAccessorImpl;
-  private final AuthorizationDataAccessor _authorizationDataAccessor;
+  private final AuthorizationDataRepository _authorizationDataRepository;
   private final AccountSavingAccessor _accountSavingAccessor;
 
 
@@ -29,7 +29,7 @@ public class IONComponent implements Startable{
    *
    */
 
-  private final UserDataService _userDataService;
+  private final UserDataRepository _userDataService;
 //  private final TransactionService _transactionService;
 
   /**
@@ -42,7 +42,7 @@ public class IONComponent implements Startable{
 
   public IONComponent() {
     _customerDataAccessorImpl = new UserDataRepositoryMockImpl();
-    _authorizationDataAccessor = new AuthorizationDataAccessorImpl();
+    _authorizationDataRepository = new PostgreAuthorizationDataRepositoryImpl();
     _accountSavingAccessor = new AccountSavingAccessorImpl();
 
 
@@ -64,7 +64,7 @@ public class IONComponent implements Startable{
 
   }
 
-  public UserDataService getUserDataService() {
+  public UserDataRepository getUserDataService() {
     return _userDataService;
   }
 
